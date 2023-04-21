@@ -19,7 +19,7 @@
     @apply bg-gradient-to-tr from-[#121212] via-[#121212] to-[#2f2f3e];
   }
   .form-input{  
-    @apply outline-none p-2 text-lg placeholder:text-white font-semibold bg-transparent w-full mt-4 rounded-xl border-white/20 border-4;
+    @apply outline-none p-2 placeholder:text-white/50 text-lg font-semibold bg-transparent w-full mt-4 rounded-xl border-white/20 border-4;
   }
   .trans{
     @apply transition-all duration-150
