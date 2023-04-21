@@ -1,3 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base{
+  *{
+    @apply m-0 p-0 box-border;
+  }
+  body{
+    @apply md:h-[100vh] w-full bg-[#211c29];
+  }
+}
+
+@layer components{
+  .gradient-bg{
+    @apply bg-gradient-to-tr from-[#ab2cca] via-[#d856b7] to-[#f999bc];
+  }
+  .gradient-bg-dark{
+    @apply bg-gradient-to-tr from-[#121212] via-[#121212] to-[#2f2f3e];
+  }
+  .form-input{  
+    @apply outline-none p-2 text-lg placeholder:text-white font-semibold bg-transparent w-full mt-4 rounded-xl border-white/20 border-4;
+  }
+  .trans{
+    @apply transition-all duration-150
+  }
+  .button{
+    @apply trans cursor-pointer
+  }
+
+  .dark-back{
+    @apply backdrop-blur-md bg-black/80 overflow-hidden h-full rounded-xl border-[3px] border-dashed border-white/20;
+  }
+
+  .border-dash{
+    @apply border-dashed border-white/20
+  }
+
+  .user-gradient{
+    @apply bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500;
+  }
+}
