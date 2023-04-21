@@ -3,16 +3,23 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 const Signup = () => {
-    const {register, handleSubmit} = useForm()
-    const onSubmit = async (data:any) => {
-        const {email,password} = data
-        const {user, session, error}:any = await supabase.auth.signUp({
-            email,password
+    const { register, handleSubmit } = useForm()
+    const onSubmit = async (data: any) => {
+        const { email, password,image,gender,fname,lname,company,team } = data
+        const {user,session, error }: any = await supabase.auth.signUp({
+            email,
+            password
         })
-        if(error) console.log(error)
-        else{
-            supabase
-            console.log(user,session)
+        console.log(user,session)
+        if (!error) {
+            const { data, error } = await supabase
+                .from('Users')
+                .insert([
+                    {email,image,gender,fname,lname,company,team,role:"admin"},
+                ])
+            if(!error) {
+                console.log("Added")
+            }
         }
     }
 
@@ -34,7 +41,7 @@ const Signup = () => {
                         <option value="F">Female</option>
                     </select>
                 </div>
-                <input type="email" required id="id"  placeholder='email' className='form-input' {...register("email")} />
+                <input type="email" required id="id" placeholder='email' className='form-input' {...register("email")} />
                 <input type="password" required id="password" placeholder='password' className='form-input' {...register("password")} />
                 <div className="grid grid-cols-2 grid-row-1 gap-2">
                     <input className='form-input' type="text" id="fname" placeholder='Company Name' required {...register("company")} />
