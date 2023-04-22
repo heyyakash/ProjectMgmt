@@ -10,10 +10,10 @@ const App = (props: any) => {
     )
 }
 
+
 export const getServerSideProps = async (ctx: any) => {
-    // Create authenticated Supabase Client
+
     const supabase = createServerSupabaseClient(ctx)
-    // Check if we have a session
     const {
         data: { session },
     } = await supabase.auth.getSession()
@@ -28,14 +28,23 @@ export const getServerSideProps = async (ctx: any) => {
         }
     console.log(session.user.email)
     const { data: metadata, error } = await supabase.from("Users").select("*").eq("email",session.user.email)
-
-    return {
-        props: {
-            initialSession: session,
-            user: session.user,
-            metadata
-        },
+    if (!error){
+        const {data:members, error} = await supabase.from("Users").select("*").eq("company",metadata[0].company).eq("team",metadata[0].team)
+        if(!error) {
+            return {
+                props: {
+                    initialSession: session,
+                    user: session.user,
+                    metadata,
+                    members
+                },
+            }
+        }
     }
+    
+  
+   
 }
+
 
 export default App

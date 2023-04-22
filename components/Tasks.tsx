@@ -21,6 +21,10 @@ const Tasks = ({ name }: Taskprops) => {
             </div>
             <div className='w-full p-10 flex flex-col gap-10'>
                 <Post type={name} heading='Create a Admin Dashboard' text='Create an admin dashboard for Xylem with features to monitor sales' />
+                <Post type={name} heading='Create a Admin Dashboard' text='Create an admin dashboard for Xylem with features to monitor sales' />
+                <Post type={name} heading='Create a Admin Dashboard' text='Create an admin dashboard for Xylem with features to monitor sales' />
+                <Post type={name} heading='Create a Admin Dashboard' text='Create an admin dashboard for Xylem with features to monitor sales' />
+                <Post type={name} heading='Create a Admin Dashboard' text='Create an admin dashboard for Xylem with features to monitor sales' />
            
             </div>
         </div>

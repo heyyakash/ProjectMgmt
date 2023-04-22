@@ -26,7 +26,7 @@ const Navbar = ({ image }: props) => {
                 <Link href = {"/dashboard"}><AiOutlineHome /></Link>
                 <HiOutlineBellAlert />
                 <BsChatLeft />
-                <BsCalendar3Event />
+                <Link href = {"/calendar"}><BsCalendar3Event /></Link>
                 <IoSettingsOutline />
             </div>
             <img className='h-12 w-12 cursor-pointer rounded-full object-cover' onClick={()=>signOut()} src={image} alt="profile" />

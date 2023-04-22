@@ -4,8 +4,6 @@ import React, { useState } from 'react'
 
 const App = () => {
     const [option, setOption] = useState<"login" | "signup">("login")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
 
 
     return (
@@ -21,7 +19,7 @@ const App = () => {
     )
 }
 
-App.Layout = ({children}:any  ) => {
+App.Layout = ({children}:any) => {
     return(
         <>
         {children}

@@ -19,7 +19,7 @@ const Dropdowns = ({ name,list }: props) => {
                 }
             </div>
             <div className={`text-md flex flex-col w-full p-2 text-white/50 font-[500] gap-3 trans ${show?"":"hidden"}`}>
-                {list.map(x=><p>{x}</p>)}
+                {list.map(x=><p key = {x}>{x}</p>)}
             </div>
         </div>
     )

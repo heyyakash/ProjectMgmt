@@ -27,6 +27,7 @@ export const getServerSideProps = async (ctx: any) => {
     console.log(session.user.email)
     const { data: metadata, error } = await supabase.from("Users").select("*").eq("email",session.user.email)
     if (!error){
+        
         const {data:members, error} = await supabase.from("Users").select("*").eq("company",metadata[0].company).eq("team",metadata[0].team)
         if(!error) {
             return {
