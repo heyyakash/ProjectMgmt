@@ -35,10 +35,12 @@ export default function App({ Component, pageProps }: ComponentType  ) {
       <div className='w-full h-[100vh] flex '>
         <Navbar image={pageProps.metadata[0].image} />
         <Sidebar />
-        <section className='w-[calc(100%-430px+.25rem)] pt-5 flex flex-col  text-white'>
+        <section className='w-[calc(100%-390px+.25rem)] pt-5 flex flex-col  text-white'>
           <div className='flex w-full p-5 px-8 gap-2 items-end'>
             <h1 className='text-[1.6rem] font-bold'>{pageProps.metadata[0].company} /</h1> <p className='text-white/50 mb-1    '>{pageProps.metadata[0].team}</p>
-            <div className='ml-auto flex'>
+            
+            <Link href = "/" className='bg-pink-500 p-2 rounded-xl ml-auto cursor-pointer text-white trans hover:text-pink-500 hover:bg-white font-semibold '>Add Task</Link>
+            <div className='ml-2 flex'>
               {pageProps.members.length!==0?
                 pageProps.members.map((x:any)=>{
                   return <img src={x.image} key = {x.email} className='h-10 w-10 rounded-full object-cover' alt="profilePicture" /> 
