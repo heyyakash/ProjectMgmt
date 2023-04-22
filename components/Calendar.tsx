@@ -17,7 +17,7 @@ const CalenderContainer = () => {
 
     useEffect(() => {
         manageDate()
-    }, []);
+    }, [value]);
 
     const manageDate = () => {
         const a = [];
