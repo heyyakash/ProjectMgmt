@@ -21,4 +21,12 @@ const login = () => {
     )
 }
 
+login.Layout = ({children}:any  ) => {
+    return(
+        <>
+        {children}
+        </>
+    )
+}
+
 export default login

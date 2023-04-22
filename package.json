@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/auth-helpers-nextjs": "^0.6.1",
+    "@supabase/auth-helpers-react": "^0.3.1",
     "@supabase/supabase-js": "^2.21.0",
     "@types/node": "18.15.12",
     "@types/react": "18.0.37",
@@ -19,6 +21,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
+    "react-icons": "^4.8.0",
     "typescript": "5.0.4"
   },
   "devDependencies": {

@@ -1,9 +1,11 @@
-import { supabase } from '@/helper/supabaseClient'
+// import { supabase } from '@/helper/supabaseClient'
+import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 const Signup = () => {
     const { register, handleSubmit } = useForm()
+    const supabase = useSupabaseClient()
     const onSubmit = async (data: any) => {
         const { email, password,image,gender,fname,lname,company,team } = data
         const {user,session, error }: any = await supabase.auth.signUp({

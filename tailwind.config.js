@@ -9,7 +9,14 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        "mont":['Montserrat']
+      },
+      fontWeight:{
+        "lilbold":[500]
+      }
+    },
   },
   plugins: [],
 }

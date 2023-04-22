@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,13 +9,22 @@
     @apply m-0 p-0 box-border;
   }
   body{
-    @apply md:h-[100vh] w-full bg-[#211c29];
+    @apply md:h-[100vh] w-full bg-[#1d1c2a] font-mont;
   }
 }
 
 @layer components{
+  .border-sec{
+    @apply border-indigo-500/30
+  }
+  .input-sec{
+    @apply border-sec mt-2 h-[50px] text-lg p-2 bg-sec text-white;
+  }
   .gradient-bg{
     @apply bg-gradient-to-tr from-[#ab2cca] via-[#d856b7] to-[#f999bc];
+  }
+  .bg-sec{
+    @apply bg-indigo-500/10
   }
   .gradient-bg-dark{
     @apply bg-gradient-to-tr from-[#121212] via-[#121212] to-[#2f2f3e];
