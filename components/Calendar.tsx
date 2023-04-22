@@ -17,7 +17,7 @@ const CalenderContainer = () => {
 
     useEffect(() => {
         manageDate()
-    }, []);
+    }, [startDay,endDay]);
 
     const manageDate = () => {
         const a = [];
@@ -39,11 +39,11 @@ const CalenderContainer = () => {
                 <div className=' p-4 w-full flex flex-col h-full'>
 
                     <div className='w-full h-[30px] p-4 flex justify-between items-center '>
-                        <span className='bg-white p-2 rounded-xl' onClick={() => setValue(value.clone().subtract(1, 'months'))}>
+                        <span className='bg-white p-2 rounded-xl' onClick={() => {setValue(value.clone().subtract(1, 'months'))}}>
                             <GrPrevious />
                         </span>
                         <h2 className='text-xl font-semibold'>{month}</h2>
-                        <span className='bg-white p-2 rounded-xl' onClick={() => setValue(value.clone().add(1, 'months'))}>
+                        <span className='bg-white p-2 rounded-xl' onClick={() => {setValue(value.clone().add(1, 'months'))}}>
                             <GrNext />
                         </span>
                     </div>

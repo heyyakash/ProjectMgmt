@@ -2,7 +2,7 @@ import Login from '@/components/Login'
 import Signup from '@/components/Signup'
 import React, { useState } from 'react'
 
-export default function App (){
+export default function LoginPage (){
     const [option, setOption] = useState<"login" | "signup">("login")
 
 
@@ -19,7 +19,7 @@ export default function App (){
     )
 }
 
-App.Layout = ({children}:any) => {
+LoginPage.Layout = ({children}:any) => {
     return(
         <>
         {children}
