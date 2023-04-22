@@ -16,14 +16,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       Hello
-          </>
+    </>
   )
 }
 
-Home.getLayout = function getLayout(page: ReactElement) {
-  return (
-      <>
-          {page}
-      </>
-  )
-}
+

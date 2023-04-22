@@ -10,6 +10,13 @@ const App = (props: any) => {
     )
 }
 
+App.getLayout = ({ children }:any) => {
+    return (
+        <>
+            {children}
+        </>
+    )
+}
 
 export const getServerSideProps = async (ctx: any) => {
 
