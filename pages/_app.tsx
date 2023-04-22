@@ -8,7 +8,7 @@ import type { AppProps } from 'next/app'
 import Link from 'next/link'
 
 type ComponentType = {
-  Component: NextComponentType<NextPageContext, any, any> & { Layout?: JSX.Element }
+  Component: NextComponentType<NextPageContext, any, any> & { getLayout?:JSX.Element }
   pageProps: any
 }
 
