@@ -25,7 +25,7 @@ const Navbar = ({ image }: props) => {
             <div className='w-full text-white flex flex-col text-[1.5rem] gap-[3rem] items-center'>
                 <Link href = {"/dashboard"}><AiOutlineHome /></Link>
                 <HiOutlineBellAlert />
-                <BsChatLeft />
+                <Link href = {"/chats"}><BsChatLeft /></Link>
                 <Link href = {"/calendar"}><BsCalendar3Event /></Link>
                 <IoSettingsOutline />
             </div>
