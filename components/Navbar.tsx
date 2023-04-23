@@ -27,7 +27,7 @@ const Navbar = ({ image }: props) => {
             <IoPeopleCircle className="text-pink-600 text-[3rem] mt-5" />
             <div className='w-full text-white flex flex-col text-[1.5rem] gap-[3rem] items-center'>
                 <Link href = {"/dashboard"}><AiOutlineHome /></Link>
-                <HiOutlineBellAlert />
+                <Link href = {"/analysis"}><HiOutlineBellAlert /></Link>
                 <Link href = {"/chats"}><BsChatLeft /></Link>
                 <Link href = {"/calendar"}><BsCalendar3Event /></Link>
                 <IoSettingsOutline />

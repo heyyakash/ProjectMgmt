@@ -14,7 +14,7 @@ type ComponentType = {
 
 export default function App({ Component, pageProps }: ComponentType) {
   const supabaseClient = createBrowserSupabaseClient()
-  console.log(pageProps)
+  // console.log(pageProps)
 
   const getLayout = Component.getLayout
   if (getLayout) {
