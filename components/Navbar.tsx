@@ -6,6 +6,7 @@ import { HiOutlineBellAlert } from 'react-icons/hi2'
 import { BsChatLeft, BsCalendar3Event } from 'react-icons/bs'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 
 type props = {
@@ -14,9 +15,11 @@ type props = {
 
 
 const Navbar = ({ image }: props) => {
+    const router = useRouter()
     const supabase = useSupabaseClient()
     const signOut = async() => {
         await supabase.auth.signOut()
+        router.push('/login')
     }
     return (
 
