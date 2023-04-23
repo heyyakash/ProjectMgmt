@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: ComponentType) {
             <div className='flex w-full p-5 px-8 gap-2 items-end'>
               <h1 className='text-[1.6rem] font-bold'>{pageProps.metadata[0].company} /</h1> <p className='text-white/50 mb-1    '>{pageProps.metadata[0].team}</p>
 
-              <Link href="/adduser" className='bg-pink-500 p-2 rounded-xl ml-auto cursor-pointer text-white trans hover:text-pink-500 hover:bg-white font-semibold '>Add Task</Link>
+              <Link href="/calendar" className='bg-pink-500 p-2 rounded-xl ml-auto cursor-pointer text-white trans hover:text-pink-500 hover:bg-white font-semibold '>Add Task</Link>
               <div className='ml-2 flex'>
                 {pageProps.members.length !== 0 ?
                   pageProps.members.map((x: any) => {

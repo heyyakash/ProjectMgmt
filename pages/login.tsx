@@ -1,5 +1,6 @@
 import Login from '@/components/Login'
 import Signup from '@/components/Signup'
+import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import React, { useState } from 'react'
 
 const LoginPage = () => {
@@ -20,3 +21,20 @@ const LoginPage = () => {
 }
 
 export default LoginPage
+
+export const getServerSideProps = async (ctx: any) => {
+
+    const supabase = createServerSupabaseClient(ctx)
+    const {
+        data: { session },
+    } = await supabase.auth.getSession()
+
+
+    if (session)
+        return {
+            redirect: {
+                destination: '/dashboard',
+                permanent: false,
+            },
+        } 
+}
