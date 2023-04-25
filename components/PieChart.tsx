@@ -16,7 +16,7 @@ export function PieChart({ sentiment }: props) {
         labels: ['Positive', 'Neutral', 'Negative'],
         datasets: [
             {
-                label: 'Team Sentiment',
+                label: 'Sentiment',
                 data: sentiment,
                 backgroundColor: [
                     'rgba(75, 192, 192, 0.3)',

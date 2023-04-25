@@ -6,14 +6,15 @@ import Day from './Day';
 import Taskform from './Taskform';
 
 
-const CalenderContainer = () => {
+const CalenderContainer = (props:any) => {
     const [value, setValue] = useState(moment());
-    const [date, setDate] = useState<any>(null)
+    const [date, setDate] = useState<string | null>(null)
     const [calendar, setCalendar] = useState<any>([]);
     const [mode, setMode] = useState<'calendar' | 'form'>("calendar")
     const month = value.clone().format("MMMM").toString();
     const startDay = value.clone().startOf("month").startOf("week");
     const endDay = value.clone().endOf("month").endOf("week");
+    const [task, setTask] = useState<string>("")
 
 
 
@@ -79,7 +80,7 @@ const CalenderContainer = () => {
         )
     }
     return (
-        <Taskform />
+        <Taskform date = {date} setDate = {setDate} mode = {mode} setMode = {setMode} task = {task} setTask = {setTask} company = {props.metadata[0].company} team = {props.metadata[0].team} />
     )
 }
 
