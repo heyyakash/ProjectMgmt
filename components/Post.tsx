@@ -37,11 +37,11 @@ const Post = ({ type, heading, text, category, id,image }: props) => {
             </div>
             <div >
                 <a href="#">
-                    <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    <h5 className="mb-2 text-xl font-bold tracking-tight text-white">
                         {heading}
                     </h5>
                 </a>
-                <p className="mb-3 font-normal text-gray-700  dark:text-gray-400">
+                <p className="mb-3 text-gray-400 font-lilbold">
                     {text}
                 </p>
                 {role === "admin" ?

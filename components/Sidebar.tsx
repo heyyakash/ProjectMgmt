@@ -23,10 +23,10 @@ const Sidebar = (props: any) => {
 
 
     return (
-        <div className="w-[300px] border-r-[1px] border-indigo-500/20 h-full overflow-auto rounded-l-2xl bg-[#222131] -ml-1 flex flex-col p-8 items-center ">
-            <div className='w-full h-[60px] mb-2 bg-indigo-500/10 px-4 rounded-xl flex items-center gap-3'>
+        <div className="w-[300px] border-r-[1px] border-indigo-500/20 h-full overflow-auto rounded-l-2xl bg-[#222131] -ml-2 flex flex-col p-4 items-center ">
+            <div className='w-full h-[50px] mb-4 bg-indigo-500/10 px-4 rounded-xl flex items-center gap-3'>
                 <BsSearch className="text-white" />
-                <input type="text" className='text-white w-full bg-transparent border-none outline-none' placeholder='Search here' />
+                <input type="text" className='text-white w-full bg-transparent border-none text-sm outline-none' placeholder='Search here' />
             </div>
 
             <Dropdowns name="Current" list={current} />

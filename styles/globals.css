@@ -9,7 +9,7 @@
     @apply m-0 p-0 box-border scrollbar-thumb-gray-600/50 scrollbar scrollbar-w-[3px];
   }
   body{
-    @apply md:h-[100vh] w-full bg-[#1d1c2a] font-mont;
+    @apply md:h-[100vh] overflow-hidden w-full bg-[#1d1c2a] font-mont;
   }
 }
 
@@ -30,7 +30,7 @@
     @apply bg-gradient-to-tr from-[#121212] via-[#121212] to-[#2f2f3e];
   }
   .form-input{  
-    @apply outline-none p-2 placeholder:text-white/50 text-lg font-semibold bg-transparent w-full mt-4 rounded-xl border-white/20 border-4;
+    @apply outline-none p-2  placeholder:text-white/50 text-sm font-lilbold bg-transparent w-full mt-4 rounded-lg border-white/20 border-2;
   }
   .trans{
     @apply transition-all duration-150

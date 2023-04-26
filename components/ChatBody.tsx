@@ -42,9 +42,7 @@ const ChatBody = (props:any) => {
     const [msg, setMsg] = useState<string>("")
     return (
         <div className='flex flex-col w-[calc(100%-350px)]'>
-            <div className=' py-[1.38rem] flex items-center border-b border-sec justify-center'>
-                <h2 className='text-2xl font-lilbold'>Chat / Discussion</h2>
-            </div>
+    
             <div className='w-full h-[calc(100%-70px-2.76rem)] overflow-y-auto p-6'>
                 {messages.length>0? messages.map((x:any)=> <ChatMessage key = {x.id} email = {x.email} message={x.message} direction={x.email===email?"float-right":"float-left"} />):<>Nothing To see</>}
                 

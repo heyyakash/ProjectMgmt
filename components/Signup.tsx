@@ -30,8 +30,8 @@ const Signup = () => {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center py-[2rem] text-white w-full md:w-[400px]' action="">
 
-            <h1 className="text-[2.5rem] font-extrabold">Sign up.</h1>
-            <div className='mt-7 w-full px-8 md:p-4 '>
+            <h1 className="text-[1.75rem] font-extrabold">Sign up.</h1>
+            <div className=' w-full px-8 md:p-4 '>
                 <div className="grid grid-cols-2 grid-row-1 gap-2">
                     <input className='form-input' type="text" id="fname" placeholder='First Name' required {...register("fname")} />
                     <input className='form-input' type="text" id="lname" placeholder='Last Name' required {...register("lname")} />

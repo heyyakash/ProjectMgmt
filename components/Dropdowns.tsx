@@ -37,8 +37,8 @@ const DropDownOption = ({ name, id }: DropDownOptionProps) => {
 
     return (
         <div className='hover:bg-sec group trans rounded-xl items-center hover:text-white flex justify-between p-2'>
-            <p>{name}</p>
-            <div className='hidden group-hover:flex gap-3'>
+            <p className='text-[.9rem]'>{name}</p>
+            <div className='hidden text-[.9rem] group-hover:flex gap-3'>
                 <TiTick onClick={()=>updateProjectMutation()} className='hover:text-green-500 cursor-pointer' />
                 <BsFillTrash2Fill onClick={()=>deleteProjectMutation()} className='hover:text-red-500 cursor-pointer' />
             </div>
@@ -52,9 +52,9 @@ const Dropdowns = ({ name, list }: props) => {
     const [show, setShow] = useState<boolean>(true)
 
     return (
-        <div className={`flex flex-col w-full trans ${show ? "my-4" : "mt-2"}`}>
+        <div className={`flex flex-col w-full trans ${show ? "mt-2" : "mt-1"}`}>
             <div className='flex items-center text-white text-[1rem] cursor-pointer justify-between font-lilbold p-2' onClick={() => setShow(!show)}>
-                <p>{name.toUpperCase()}</p>
+                <p className='text-sm font-lilbold'>{name}</p>
                 {
                     show ? <AiOutlineUp /> : <AiOutlineDown />
                 }

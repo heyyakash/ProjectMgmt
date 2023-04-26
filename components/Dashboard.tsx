@@ -44,23 +44,21 @@ const Dashboard = (props: any) => {
 
     // console.log(tasks)
     return (
-        <div className='w-full flex flex-col  items-center h-[calc(100vh-100px)]'>
-            <div className='mt-5 flex justify-between items-center h-[90px] text-white/50  w-[95%] border-b-2 border-b-indigo-500/20'>
-                <div className='flex px-2 gap-3 items-center font-lilbold'>
+        <div className='w-full flex flex-col  items-center h-[calc(100vh-60px)]'>
+            {/* <div className=' flex justify-between items-center h-[70px] text-white/50  w-[97%] border-b border-sec'>
+                <div className='flex  gap-3 items-center text-[.9rem] font-lilbold'>
                     <p>Discussion</p>
                     <p className='text-white'>Tasks</p>
-                    <p>Timeline</p>
-                    <p>Overview</p>
                 </div>
-                {/* <p className='font-lilbold'>{(new Date()).toLocaleString()}</p> */}
-            </div>
-            <div className='w-full border-b-2 border-b-indigo-500/20 h-[90px] gap-2 flex items-center px-8'>
+
+            </div> */}
+            <div className='w-full border-b-2 border-b-indigo-500/20 h-[70px]  text-sm gap-2 flex items-center px-4'>
                 <button className='py-1 px-4 bg-sec rounded-2xl text-white font-lilbold items-center flex gap-2'>
-                    <BsFillKanbanFill />
+                    <BsFillKanbanFill className='text-xs' />
                     <p>Kanban</p>
                 </button>
                 <button className='py-1 px-4 bg-sec rounded-2xl text-white font-lilbold items-center flex gap-2'>
-                    <FaListAlt />
+                    <FaListAlt className='text-xs' />
                     <p>List</p>
                 </button>
             </div>

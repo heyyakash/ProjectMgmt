@@ -16,14 +16,13 @@ export const color = {
 
 const Tasks = ({ name, list }: Taskprops) => {
     return (
-        <div className=' overflow-auto border-r-[1.75px] border-sec'>
-            <div className='h-[80px] flex w-full px-8 items-center gap-2 border-b-[1.75px] border-sec '>
+        <div className=' overflow-auto border-r border-sec'>
+            <div className='h-[70px] flex w-full px-8 items-center gap-2 justify-between flex-row-reverse border-b border-sec '>
                 <div className={`h-2 w-2  rounded-full ${color[name]}`}></div>
-                <p className='font-bold text-lg'>{name}</p>
+                <p className='font-semibold text-sm'>{name}</p>
             </div>
-            <div className='w-full p-10 flex flex-col gap-10'>
+            <div className='w-full p-4 md:p-6 flex flex-col gap-6'>
                 {list.map(x=><Post id= {x.id} image = {x.user_image} category={x.task_category} type = {name} heading={x.task_title} text = {x.task_desc} key = {x.id} />)}
-                {/* <Post type={name} heading='Create a Admin Dashboard' text='Create an admin dashboard for Xyl    em with features to monitor sales' />``                <Post type={name} heading='Create a Admin Dashboard' text='Create an admin dashboard for Xylem with features to monitor sales' /> */}
 
            
             </div>
