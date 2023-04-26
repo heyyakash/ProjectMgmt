@@ -6,12 +6,13 @@ import ChatBody from './ChatBody'
 const Chat = (props: any) => {
    
     const { members } = props
+    console.log(members,props.chats)
  
 
     return (
         <div className="flex flex-col h-full">
             <div className='p-8 py-6 border-sec border-b'>
-            <h2 className='text-xl font-semibold'>Team Chat</h2>
+        <h2 className='text-xl font-semibold'>Team Chat</h2>
             </div>
             <div className='w-full flex h-full'>
                 <div className='w-[350px]  border-r border-sec flex flex-col'>
