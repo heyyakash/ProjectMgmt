@@ -4,7 +4,7 @@ import moment from 'moment';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
-        const { task, company, team, deadline } = req.body
+        const { task, company, team, deadline ,project} = req.body
         try {
             await MindsDB.connect({
                 user: process.env.NEXT_PUBLIC_USER_EMAIL as string,
@@ -42,6 +42,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         })
 
         const user = await result.json()
+        console.log(category,user)
+        console.log(req.body)
 
         if (user.length !== 0) {
             const assign = await fetch(`https://yggyysemhotnqjuzxjow.supabase.co/rest/v1/tasks`, {
@@ -58,14 +60,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     task_category: category,
                     assigned_to: user[0].email,
                     deadline_date: moment(deadline, "DD-MM-YYYY").toISOString(),
-                    project: "Xylem",
-                    status: "New",
+                    project,
+                    user_image:user[0].image,
+                    status: "new",
                     task_title: title
                 })
             })
-            const assignResult = await assign.json()
-            console.log(assignResult)
-            return res.status(200).json({ category, title, user })
+            // const assignResult = await assign.json()
+            // console.log(assignResult)
+            return res.status(200).json({ category, title, user ,success:true})
         }
 
 

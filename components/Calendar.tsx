@@ -4,6 +4,7 @@ import moment, { Moment } from 'moment';
 import { GrPrevious, GrNext } from 'react-icons/gr';
 import Day from './Day';
 import Taskform from './Taskform';
+import { useQueryClient } from 'react-query';
 
 
 const CalenderContainer = (props:any) => {
@@ -15,7 +16,6 @@ const CalenderContainer = (props:any) => {
     const startDay = value.clone().startOf("month").startOf("week");
     const endDay = value.clone().endOf("month").endOf("week");
     const [task, setTask] = useState<string>("")
-
 
 
     useEffect(() => {
@@ -80,7 +80,7 @@ const CalenderContainer = (props:any) => {
         )
     }
     return (
-        <Taskform date = {date} setDate = {setDate} mode = {mode} setMode = {setMode} task = {task} setTask = {setTask} company = {props.metadata[0].company} team = {props.metadata[0].team} />
+        <Taskform date = {date} setDate = {setDate} mode = {mode} setMode = {setMode} task = {task} setTask = {setTask} company = {props.metadata.company} team = {props.metadata.team} />
     )
 }
 

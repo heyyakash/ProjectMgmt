@@ -40,15 +40,26 @@ const Analysis = (props: any) => {
                 <div className="py-6 px-8 w-[400px] border-r border-sec grid place-items-center">
                     <PieChart sentiment={data} />
                 </div>
-                <div className='py-6 h-full min-w-[500px] flex items-center px-8'>
+                <div className='h-full min-w-[500px] flex items-center px-8'>
                     <BarChart users={users} positives={positiveUsers} negatives={negativeUsers} neutrals={neutralUsers} />
                 </div>
             </div>
             <div className='px-8 py-8 flex flex-col gap-4 border-b border-sec'>
                 <h2 className='text-xl font-bold '>Analysis</h2>
-                <h2 className={`text-2xl font-bold ${healthy ? "text-green-500/80" : "text-red-500"}`}>{
-                    healthy ? "Team's health looks good!" : "Team's health does not look good!"
-                }</h2>
+                <div className='flex flex-col gap-4 mt-4'>
+                    {props.members.map((x:User,i:number)=>{
+                        return(
+                            <div className='flex gap-3 w-[350px] items-center' key ={x.email}>
+                                <img src={x.image} className='h-12 w-12 object-cover rounded-full' alt="profile picture"  />
+                                <h2 className='text-lg text-semibold'>{x.fname + " "+ x.lname}</h2>
+                                <div className={`ml-auto p-2 ${positiveUsers[i]>negativeUsers[i]?"bg-cyan-500/30 text-cyan-500":"bg-red-500/30 text-red-500"} rounded-xl py-1 text-sm font-semibold`}>
+                                {positiveUsers[i]>negativeUsers[i]?"Positive":"Negaitive"}
+                                </div>
+
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
         </div >
     )

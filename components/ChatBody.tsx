@@ -13,9 +13,9 @@ const ChatBody = (props:any) => {
         const subscription = supabase.channel('custom-insert-channel')
             .on(
                 'postgres_changes',
-                { event: '*', schema: 'public', table: 'Chats', filter: `company=eq.${props.metadata[0].company}` },
+                { event: '*', schema: 'public', table: 'Chats', filter: `company=eq.${props.metadata.company}` },
                 (payload:any) => {
-                    if(payload.new.team===props.metadata[0].team)
+                    if(payload.new.team===props.metadata.team)
                     setMessages((messages)=>[...messages,payload.new])
                 }
             )
@@ -29,7 +29,7 @@ const ChatBody = (props:any) => {
 
     const sendMessage = async () => {
         const {error} = await supabase.from("Chats").insert([{
-            email:props.user.email, team:props.metadata[0].team, company:props.metadata[0].company, message:msg
+            email:props.user.email, team:props.metadata.team, company:props.metadata.company, message:msg
         }])
         if(!error){
             setMsg("")

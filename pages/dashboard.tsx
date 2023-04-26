@@ -1,20 +1,28 @@
 import Dashboard from '@/components/Dashboard'
 import { supabase } from '@/helper/supabaseClient'
-import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs'
+import { SupabaseClient, createServerSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import React from 'react'
+import { QueryClient, dehydrate } from 'react-query'
 
 const App = (props: any) => {
+    
     return (
-        <Dashboard user={props} />
+        <Dashboard {...props} />
     )
 }
 
-App.getLayout = ({ children }:any) => {
+App.getLayout = ({ children }: any) => {
     return (
         <>
             {children}
         </>
     )
+}
+
+
+const userData = async(supabase:SupabaseClient<any, 'public', any>,email:string) => {
+    const {data,error} = await supabase.from("Users").select("*").eq("email",email)
+    return data
 }
 
 export const getServerSideProps = async (ctx: any) => {
@@ -32,22 +40,27 @@ export const getServerSideProps = async (ctx: any) => {
                 permanent: false,
             },
         }
-    console.log(session.user.email)
-    const { data: metadata, error } = await supabase.from("Users").select("*").eq("email",session.user.email)
-    if (!error){
-        
-        const {data:members, error} = await supabase.from("Users").select("*").eq("company",metadata[0].company).eq("team",metadata[0].team)
-        if(!error) {
+
+    const queryClient = new QueryClient()
+    await queryClient.prefetchQuery(['testdata'],async()=>await userData(supabase,session.user.email as string))
+    const {data:metadata,error} = await supabase.from("Users").select("*").eq("email", session.user.email)
+    if (!error) {
+
+        const { data: members, error } = await supabase.from("Users").select("*").eq("company", metadata[0].company).eq("team", metadata[0].team)
+        if (!error) {
             return {
                 props: {
-                    initialSession: session,
+                    // initialSession: session,
                     user: session.user,
-                    metadata,
+                    metadata:metadata[0],
                     members
                 },
             }
         }
-    } 
+    }
+
+    
+    
 }
 
 export default App

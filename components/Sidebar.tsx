@@ -1,13 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
 import Dropdowns from './Dropdowns'
+import { useSupabaseClient } from '@supabase/auth-helpers-react'
+import { useQuery } from 'react-query'
+import { project } from '@/types/projects.types'
+import getProjects from '@/helper/getProjects'
 
-const Sidebar = () => {
-    const currList = [
-        "Redbull", "Xylem", "Rockstar"
-    ]
-    const allList = [...currList,"EA Sports","Netflix"]
-    const compList = ["EA sports","Netflix"]
+const Sidebar = (props: any) => {
+    const supabase = useSupabaseClient()
+    const { company, team } = props.metadata
+    const [current, setCurrent] = useState<project[]>([])
+    const [all, setAll] = useState<project[]>([])
+    const [completed, setCompleted] = useState<project[]>([])
+
+    const { data, isError } = useQuery('projects', () => getProjects(supabase, company, team), {
+        onSuccess: (d: project[]) => {
+            setCurrent(d.filter(x => x.status === "current"))
+            setAll(d)
+            setCompleted(d.filter(x => x.status === "completed"))
+        }
+    })
+
+
     return (
         <div className="w-[300px] border-r-[1px] border-indigo-500/20 h-full overflow-auto rounded-l-2xl bg-[#222131] -ml-1 flex flex-col p-8 items-center ">
             <div className='w-full h-[60px] mb-2 bg-indigo-500/10 px-4 rounded-xl flex items-center gap-3'>
@@ -15,9 +29,9 @@ const Sidebar = () => {
                 <input type="text" className='text-white w-full bg-transparent border-none outline-none' placeholder='Search here' />
             </div>
 
-            <Dropdowns name="Current" list={currList} />
-            <Dropdowns name="All Projects" list = {allList} />
-            <Dropdowns name="Completed" list = {compList} />
+            <Dropdowns name="Current" list={current} />
+            <Dropdowns name="All Projects" list={all} />
+            <Dropdowns name="Completed" list={completed} />
         </div>
     )
 }

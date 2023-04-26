@@ -8,7 +8,7 @@ import { redirect } from 'next/dist/server/api-utils'
 const AddUser = (props: any) => {
     const { register, handleSubmit } = useForm()
     const supabase = useSupabaseClient()
-    const { company, team } = props.metadata[0]
+    const { company, team } = props.metadata
 
     const createUser = async (payload: any) => {
         const { email, password, image, gender, fname, lname } = payload

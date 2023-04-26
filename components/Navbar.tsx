@@ -24,13 +24,13 @@ const Navbar = ({ image }: props) => {
     return (
 
         <div className='w-[90px] h-full bg-indigo-500/10 justify-between flex items-center py-4 pr-1 flex-col'>
-            <IoPeopleCircle className="text-pink-600 text-[3rem] mt-5" />
-            <div className='w-full text-white flex flex-col text-[1.5rem] gap-[3rem] items-center'>
-                <Link href = {"/dashboard"}><AiOutlineHome /></Link>
-                <Link href = {"/analysis"}><HiOutlineBellAlert /></Link>
-                <Link href = {"/chats"}><BsChatLeft /></Link>
-                <Link href = {"/calendar"}><BsCalendar3Event /></Link>
-                <IoSettingsOutline />
+            <Link href = "/dashboard"><IoPeopleCircle className="text-pink-600 text-[3rem] mt-5" /></Link>
+            <div className='w-full text-white flex flex-col text-[1.5rem] gap-[2rem] items-center'>
+                <Link href = {"/dashboard"} className={`hover:bg-white hover:text-black p-2 rounded-xl trans`}><AiOutlineHome /></Link>
+                <Link href = {"/analysis"} className={`hover:bg-white hover:text-black p-2 rounded-xl trans`}><HiOutlineBellAlert /></Link>
+                <Link href = {"/chats"} className={`hover:bg-white hover:text-black p-2 rounded-xl trans`}><BsChatLeft /></Link>
+                <Link href = {"/calendar"} className={`hover:bg-white hover:text-black p-2 rounded-xl trans`}><BsCalendar3Event /></Link>
+                <Link href = {"/settings"} className={`hover:bg-white hover:text-black p-2 rounded-xl trans`}><IoSettingsOutline  /></Link>
             </div>
             <img className='h-12 w-12 cursor-pointer rounded-full object-cover' onClick={()=>signOut()} src={image} alt="profile" />
 
