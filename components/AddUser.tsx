@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Signup from './Signup'
 import { useForm } from 'react-hook-form'
 // import { SupabaseClient } from '@supabase/supabase-js'
@@ -9,20 +9,26 @@ const AddUser = (props: any) => {
     const { register, handleSubmit } = useForm()
     const supabase = useSupabaseClient()
     const { company, team } = props.metadata
+    const [success,setSuccess] = useState<boolean>(false)
 
     const createUser = async (payload: any) => {
-        const { email, password, image, gender, fname, lname } = payload
+        // const { email, password, image, gender, fname, lname } = payload
         payload.company = company
         payload.team = team
-        const res = await fetch(`/api/userapi`,{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
+        const res = await fetch(`/api/userapi`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
             },
-            body:JSON.stringify({data:payload})
+            body: JSON.stringify({ data: payload })
         })
         const result = await res.json()
-        if (result.success) console.log("Added")
+        if (result.success){
+            setSuccess(true)
+            setTimeout(() => {
+                setSuccess(false)
+            }, 5000);
+        }
         else {
             console.log("Failed")
         }
@@ -60,6 +66,16 @@ const AddUser = (props: any) => {
                     </div>
                 </div>
                 <div className='flex flex-col'>
+                    <label htmlFor="skill">Skill</label>
+                    <select {...register("skills")} className='input-sec' id="skill">
+                        <option value="Web Development">Web Developer</option>
+                        <option value="DevOps">DevOps</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="App Development">App Developer</option>
+                        <option value="Design">UI /UX</option>
+                    </select>
+                </div>
+                <div className='flex flex-col'>
                     <label htmlFor="email">Email</label>
                     <input required type="email" id="email" {...register("email")} className='input-sec' />
                 </div>
@@ -81,7 +97,7 @@ const AddUser = (props: any) => {
                         <input required type="text" id="lname" {...register("image")} className='input-sec' />
                     </div>
 
-                    <input required type="submit" value="Create" className='bg-pink-500 mt-4 cursor-pointer hover:text-pink-500 hover:bg-white trans font-lilbold py-3' />
+                    <input required type="submit" value={success?"Successfully Added":"Create"} className={`${success?"bg-green-500":"bg-pink-500"} mt-4 cursor-pointer hover:text-pink-500 hover:bg-white trans font-lilbold py-3`} />
                 </div>
             </form>
         </>

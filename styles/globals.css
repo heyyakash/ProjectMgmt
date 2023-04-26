@@ -6,7 +6,7 @@
 
 @layer base{
   *{
-    @apply m-0 p-0 box-border;
+    @apply m-0 p-0 box-border scrollbar-thumb-gray-600/50 scrollbar scrollbar-w-[3px];
   }
   body{
     @apply md:h-[100vh] w-full bg-[#1d1c2a] font-mont;

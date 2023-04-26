@@ -27,56 +27,39 @@ const Analysis = (props: any) => {
         if (x.sentiment === "negative") negativeUsers[users.indexOf(x.email)] += 1
     })
     users.map((x, i) => {
-        users[i] = x.split("@")[0]
+        users[i] = props.members[i].fname + ' ' + props.members[i].lname
     })
 
-    // console.log(sentimentResult)
-    // console.log(data)
 
-    // if (loading) {
-
-    //     return (
-    //         <div className='h-full w-full flex text-white justify-center text-sm gap-4 items-center'>
-    //             <BsPeopleFill className='animate-ping text-2xl' />
-    //             <p>Analyzing Chats...</p>
-    //         </div>
-    //     )
-
-    // }
-    // if (isError) {
-
-    //     return (
-    //         <div className='h-full w-full flex text-white justify-center text-sm gap-4 items-center'>
-    //             {/* <BsPeopleFill className='animate-ping text-2xl' /> */}
-    //             <p>Error</p>
-    //         </div>
-    //     )
-
-    // }
     return (
-        <div className='flex flex-col'>
+        <div className='flex h-full overflow-auto flex-col'>
             <div className='w-full py-6 px-8 border-b border-sec '>
-                <h2 className='text-xl font-bold '>Team Analysis</h2>
+                <h2 className='text-xl font-bold '>Team Sentiment Analysis</h2>
             </div>
             <div className='h-[350px] flex w-full border-b border-sec '>
-                <div className="py-6 px-8 w-[400px] border-r border-sec grid place-items-center">
+                <div className="py-6 px-8 w-[50%] border-r border-sec grid place-items-center">
                     <PieChart sentiment={data} />
                 </div>
-                <div className='h-full min-w-[500px] flex items-center px-8'>
+                <div className='h-full w-[50%] py-6 justify-center overflow-auto flex items-center px-8'>
                     <BarChart users={users} positives={positiveUsers} negatives={negativeUsers} neutrals={neutralUsers} />
                 </div>
             </div>
-            <div className='px-8 py-8 flex flex-col gap-4 border-b border-sec'>
-                <h2 className='text-xl font-bold '>Analysis</h2>
-                <div className='flex flex-col gap-4 mt-4'>
+            <div className='px-8 py-8 flex flex-col b gap-4 border-b overflow-auto h-full border-sec'>
+                <h2 className='text-xl font-bold  '>Analysis</h2>
+                <div className='flex overflow-auto flex-col gap-6 mt-8'>
                     {props.members.map((x: User, i: number) => {
+                        let healthy = positiveUsers[i] > negativeUsers[i] ? true : false
                         return (
-                            <div className='flex gap-3 w-[350px] items-center' key={x.email}>
-                                <img src={x.image} className='h-12 w-12 object-cover rounded-full' alt="profile picture" />
-                                <h2 className='text-lg text-semibold'>{x.fname + " " + x.lname}</h2>
-                                <div className={`ml-auto p-2 ${positiveUsers[i] > negativeUsers[i] ? "bg-cyan-500/30 text-cyan-500" : "bg-red-500/30 text-red-500"} rounded-xl py-1 text-sm font-semibold`}>
-                                    {positiveUsers[i] > negativeUsers[i] ? "Positive" : "Negaitive"}
+                            <div className='flex w-full gap-3 justify-between items-center' key={x.email}>
+                                <div className='flex items-center gap-3'>
+                                    <img src={x.image} className='h-12 w-12 object-cover rounded-full' alt="profile picture" />
+                                    <h2 className='text-lg font-lilbold'>{x.fname + " " + x.lname}</h2>
                                 </div>
+
+                                <div className={` p-2 ${healthy ? "bg-cyan-500/30 text-cyan-500" : "bg-red-500/30 text-red-500"} rounded-xl py-1 text-sm font-semibold`}>
+                                    {healthy ? "Positive" : "Negaitive"}
+                                </div>
+                                <p className={`${healthy?"text-green-500":"text-yellow-500"} font-lilbold hidden md:block`}>{healthy ? "Seems Motivated" : "Could use a break"}</p>
 
                             </div>
                         )

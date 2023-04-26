@@ -24,7 +24,7 @@ export const options = {
     plugins: {
         title: {
             display: true,
-            text: 'Chart.js Bar Chart - Stacked',
+            text: 'Chat analysis of all members',
         },
     },
     responsive: true,
@@ -69,12 +69,7 @@ export function BarChart({ users, positives, neutrals, negatives }: props) {
                 backgroundColor: 'rgb(75, 192, 192)',
                 stack: 'Stack 0',
             },
-            {
-                label: 'Neutrals',
-                data: neutrals,
-                backgroundColor: 'rgb(75, 192, 192)',
-                stack: 'Stack 0',
-            },
+      
         ],
     };
     return <Bar options={options} data={data} />;
