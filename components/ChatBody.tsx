@@ -44,7 +44,7 @@ const ChatBody = (props:any) => {
         <div className='flex flex-col relative w-full lg:w-[calc(100%-350px)]'>
     
             <div className='w-full h-[calc(100%-70px-2.76rem)] overflow-y-auto p-6'>
-                {messages.length>0? messages.map((x:any)=> <ChatMessage key = {x.id} email = {x.email} message={x.message} direction={x.email===email?"float-right":"float-left"} />):<>Nothing To see</>}
+                {messages.length>0? messages.map((x:any)=> <ChatMessage key = {x.id} email = {x.email} message={x.message} direction={x.email===email?"float-right":"float-left"} />):<div className='w-full h-full grid place-items-center text-md font-bold'>You are the first one here! Say Hi..</div>}
                 
             </div>
             <div className='w-full bottom-0 absolute h-[70px]  border-t border-sec flex'>

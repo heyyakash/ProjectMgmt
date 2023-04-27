@@ -10,8 +10,10 @@ const AddUser = (props: any) => {
     const supabase = useSupabaseClient()
     const { company, team } = props.metadata
     const [success,setSuccess] = useState<boolean>(false)
+    const [error,setError] = useState<string | null>(null)
 
     const createUser = async (payload: any) => {
+        setError(null)
         // const { email, password, image, gender, fname, lname } = payload
         payload.company = company
         payload.team = team
@@ -30,7 +32,8 @@ const AddUser = (props: any) => {
             }, 5000);
         }
         else {
-            console.log("Failed")
+            setError(result.msg.message)
+            // console.log(result.msg.message.toString())
         }
     }
 
@@ -99,6 +102,7 @@ const AddUser = (props: any) => {
 
                     <input required type="submit" value={success?"Successfully Added":"Create"} className={`${success?"bg-green-500":"bg-pink-500"} mt-4 cursor-pointer hover:text-pink-500 hover:bg-white trans font-lilbold py-3`} />
                 </div>
+                <p className='text-red-500'>{error?error:""}</p>
             </form>
         </>
     )

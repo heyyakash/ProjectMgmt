@@ -1,28 +1,43 @@
 // import { supabase } from '@/helper/supabaseClient'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
-import React  from 'react'
+import { useRouter } from 'next/router'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 const Signup = () => {
+    const [loading, setLoading] = useState<boolean>(false)
     const { register, handleSubmit } = useForm()
     const supabase = useSupabaseClient()
+    const [error, setError] = useState<string | null>(null)
+    const router = useRouter()
     const onSubmit = async (data: any) => {
-        const { email, password,image,gender,fname,lname,company,team } = data
-        const {user,session, error }: any = await supabase.auth.signUp({
+        setError(null)
+        setLoading(true)
+        const { email, password, image, gender, fname, lname, company, team } = data
+        const { user, session, error }: any = await supabase.auth.signUp({
             email,
             password
         })
-        console.log(user,session)
         if (!error) {
             const { data, error } = await supabase
                 .from('Users')
                 .insert([
-                    {email,image,gender,fname,lname,company,team,role:"admin"},
+                    { email, image, gender, fname, lname, company, team, role: "admin" },
                 ])
-            if(!error) {
-                console.log("Added")
+            if (!error) {
+                router.push('/dashboard')
+            }
+            else {
+                const text = error.toString().split(":")[1]
+                setError(text)
             }
         }
+        else {
+            const text = error.toString().split(":")[1]
+            setError(text)
+        }
+
+        setLoading(false)
     }
 
 
@@ -49,7 +64,9 @@ const Signup = () => {
                     <input className='form-input' type="text" id="fname" placeholder='Company Name' required {...register("company")} />
                     <input className='form-input' type="text" id="lname" placeholder='Team Name' required {...register("team")} />
                 </div>
-                <input type="submit" value={"Submit"} className='w-full p-4 button mt-9 rounded-xl gradient-bg' />
+                {error ? <p className='text-red-600 font-lilbold mt-4 -mb-4 flex justify-center items-center'>{error}</p> : <></>}
+                <input type="submit" value={loading ? "Signing Up..." : "Sign Up"} className={`w-full p-4 button mt-9 rounded-xl  ${loading ? "bg-white text-pink-500" : "gradient-bg"}`} />
+                {/* <input type="submit" value={"Submit"} className='w-full p-4 button mt-9 rounded-xl gradient-bg' /> */}
             </div>
 
         </form>

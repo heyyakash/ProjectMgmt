@@ -39,7 +39,7 @@ const Analysis = (props: any) => {
             </div>
             <div className='md:h-[350px] flex w-full border-b border-sec md:flex-row flex-col'>
                 <div className="py-6 px-8 h-[350px] md:h-[full] md:w-[50%] md:border-r border-sec grid place-items-center">
-                    <PieChart sentiment={data} />
+                    {data[0]===0 && data[1]==0 && data[2]==0?(<p className='text-md text-white font-semibold'>Not Enough Data</p>):(<PieChart sentiment={data} />) }
                 </div>
                 <div className='md:h-full h-[350px] border-t border-sec md:w-[50%] py-6 justify-center overflow-auto flex items-center px-8'>
                     <BarChart users={users} positives={positiveUsers} negatives={negativeUsers} neutrals={neutralUsers} />

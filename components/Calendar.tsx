@@ -38,7 +38,7 @@ const CalenderContainer = (props:any) => {
             <>
                 <div className='flex w-full h-full flex-col lg:mt-0  '>
                     <div className='border-b p-4 border-sec'>
-                        <h2 className='text-white text-md font-lilbold'>Set Deadline</h2>
+                        <h2 className='text-white text-md  font-bold'>Set Deadline</h2>
                     </div>
                     {/* <Calendar onChange={setValue} value = {value}></Calendar> */}
                     <div className=' p-4 w-full flex flex-col h-full'>

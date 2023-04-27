@@ -19,7 +19,7 @@ const Layout = (props: any) => {
             <Sidebar {...props}  />
             <section className='w-full xl:w-[calc(100%-390px+.5rem)]  flex flex-col  text-white'>
                 <div className='flex w-full p-4 gap-2 items-end'>
-                    <h1 className='text-[1.6rem] font-semibold'>{company} /</h1> <p className='text-white/50 mb-1'>{team}</p>
+                    <h1 className='text-[1.6rem] font-semibold'>{company} </h1> <p className='text-white/50 mb-1 hidden md:block'> / {team}</p>
 
                     <Link href="/calendar" className='bg-pink-500 p-2 rounded-lg ml-auto cursor-pointer text-white trans hover:text-pink-500 hover:bg-white font-semibold text-sm'>Add Task</Link>
                     <div className='ml-2 flex'>

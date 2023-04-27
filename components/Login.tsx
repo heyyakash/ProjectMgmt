@@ -25,7 +25,6 @@ const Login = () => {
         }
         else{
             const text = error.toString().split(":")[1]
-            // console.log(error.toString())
             setError(text)
         }
     }

@@ -18,8 +18,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 if (!error) {
                     return res.status(200).json({success:true})
                 }
+                return res.status(500).json({success:false, msg:error})
         }
-        res.status(500).json({success:false})
+        res.status(500).json({success:false,msg:error})
     } else {
       res.status(401).json({success:false})
     }

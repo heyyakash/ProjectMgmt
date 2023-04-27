@@ -12,7 +12,7 @@ const Chat = (props: any) => {
     return (
         <div className="flex flex-col h-full">
             <div className='p-4 border-sec border-b'>
-        <h2 className='text-md font-lilbold'>Team Chat</h2>
+        <h2 className='text-md font-bold'>Team Chat</h2>
             </div>
             <div className='w-full flex h-full'>
                 <div className='w-[350px]  border-r border-sec hidden lg:flex flex-col'>

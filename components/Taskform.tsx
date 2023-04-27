@@ -106,12 +106,12 @@ const Taskform = ({ date, setDate, company, team, setMode, task, setTask }: prop
                             <p className='text-md font-lilbold'>{"Deadline - " + date}</p>
                             <CgArrowsExchangeV onClick={() => changeDate()} className='cursor-pointer ml-auto text-2xl' />
                         </div>
-                        <input type="submit" id="submit" name="submit" className='hidden' />
+                        <input type="submit" disabled = {projects?.length===0    } id="submit" name="submit" className='hidden' />
                         <label htmlFor="submit" className="input-sec text-sm font-bold w-[600px] flex-[.3] grid place-items-center trans px-4 hover:bg-white hover:text-slate-800">
                             {assigning ? <HiSparkles className='text-lg animate-ping ' /> : <>Assign</>}
                         </label>
                     </div>
-
+                        <p className='text-red-500 text-lg font-bold'>{error && error}</p>
                 </div>
             </form>
         </div>
