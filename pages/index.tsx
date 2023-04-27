@@ -23,7 +23,7 @@ export default function Home() {
       <main className='w-full md:h-[100vh] relative'>
     
         <div className='w-full h-[70px] relative'>
-          <nav className='w-full md:w-[1400px] mx-auto h-full flex justify-between items-center'>
+          <nav className='w-full px-2 md:px-0 md:w-[1400px] mx-auto h-full flex justify-between items-center'>
             <div className='flex items-center gap-2'>
               <IoPeopleCircle className="text-pink-600 text-[3rem]" />
               <h2 className='text-2xl font-bold text-white '>Progressify</h2>
@@ -33,11 +33,11 @@ export default function Home() {
         </div>
 
 
-        <section className='max-w-[1400px] w-full mx-auto mt-[150px] grid md:grid-rows-1 md:grid-cols-2 relative'>
+        <section className='max-w-[1400px] w-full mx-auto mt-[80px] md:mt-[150px] grid grid-rows-2 grid-cols-1 md:grid-rows-1 md:grid-cols-2 relative'>
         {/* <div className='w-[400px] h-[400px] top-[10%] left-[10%] gradient-bg rounded-full absolute'></div>
         <div className='inset-0  backdrop-blur-[100px] absolute'></div> */}
-          <div className='flex w-full flex-col gap-4 relative'>
-            <h1 className='text-[3rem] font-extrabold leading-[4.7rem] bg-gradient-to-r  from-white via-pink-400 to-purple-400 bg-clip-text text-transparent'>Maximize your team's efficiency and productivity with <span className='gradient-bg text-transparent bg-clip-text background-animate'>Progressify.</span></h1>
+          <div className='flex w-full p-4 flex-col gap-4 relative'>
+            <h1 className='text-[2rem] md:text-[3rem]  font-extrabold md:leading-[4.7rem] bg-gradient-to-r  from-white via-pink-400 to-purple-400 bg-clip-text text-transparent'>Maximize your team's efficiency and productivity with <span className='gradient-bg text-transparent bg-clip-text background-animate'>Progressify.</span></h1>
             <div className='grid grid-cols-2 grid-rows-2 gap-4 mt-5'>
               <Features text={"Let AI do the heavy lifting"}><FaDumbbell /></Features>
               <Features text={"Automate task assignment"}><HiSparkles /></Features>
@@ -61,7 +61,7 @@ export default function Home() {
 export const Features = ({ children, text }: { children: any, text: string }) => {
   return (
     <div className='flex gap-3 items-center'>
-      <div className='gradient-bg w-12 h-12 rounded-lg grid place-items-center text-white text-3xl'>
+      <div className='gradient-bg h-10 w-10 md:w-12 md:h-12 rounded-lg grid place-items-center text-white text-xl md:text-3xl'>
         {children}
       </div>
       <p className='text-white/70 font-lilbold text-md'>{text}</p>
