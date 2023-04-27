@@ -22,13 +22,13 @@ export default function App({ Component, pageProps }: ComponentType) {
   if (getLayout) {
     return (
       <Provider>
-      <QueryClientProvider client={queryClient}>
-        <SessionContextProvider supabaseClient={supabaseClient} initialSession={pageProps.initialSession}>
+        <QueryClientProvider client={queryClient}>
+          <SessionContextProvider supabaseClient={supabaseClient} initialSession={pageProps.initialSession}>
             <Layout {...pageProps}>
               <Component {...pageProps} />
             </Layout>
-        </SessionContextProvider>
-      </QueryClientProvider>
+          </SessionContextProvider>
+        </QueryClientProvider>
       </Provider>
     )
   }
