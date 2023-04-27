@@ -9,7 +9,7 @@
     @apply m-0 p-0 box-border scrollbar-thumb-gray-600/50 scrollbar scrollbar-w-[3px];
   }
   body{
-    @apply md:h-[100vh] xl:overflow-hidden w-full bg-[#1d1c2a] font-mont;
+    @apply md:h-[100vh] xl:overflow-hidden w-full bg-[#1d1c2a] relative font-mont;
   }
 }
 
@@ -21,7 +21,7 @@
     @apply border-sec mt-2 h-[50px] text-lg p-2 bg-sec text-white text-[.9rem] font-lilbold;
   }
   .gradient-bg{
-    @apply bg-gradient-to-tr from-[#ab2cca] via-[#d856b7] to-[#f999bc];
+    @apply bg-gradient-to-tr from-[#ab2cca] via-[#d856b7] to-[#f999bc]  ;
   }
   .bg-sec{
     @apply bg-indigo-500/10
@@ -50,4 +50,26 @@
   .user-gradient{
     @apply bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500;
   }
+  .hero-image{
+    @apply h-[190px] cursor-pointer background-animate hover:z-[1000] hover:border-[10px] hover:border-transparent bg-clip-border gradient-bg trans hover:scale-[1.5] absolute
+  }
+  .background-animate{
+    background-size: 200%;
+    -webkit-animation: gradient-animation 5s ease infinite;
+    -moz-animation: gradient-animation 5s ease infinite;
+    animation: gradient-animation 5s ease infinite;
+  }
+}
+
+
+@keyframes gradient-animation {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }

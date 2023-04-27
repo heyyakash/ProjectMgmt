@@ -15,7 +15,7 @@ module.exports = {
       },
       fontWeight:{
         "lilbold":[500]
-      }
+      },
     },
   },
   plugins: [
