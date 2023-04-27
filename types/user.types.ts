@@ -9,5 +9,6 @@ export type User = {
     fname: string;
     lname: string;
     role: string;
+    skills: string
   }
   

@@ -16,6 +16,7 @@ const Analysis = (props: any) => {
 
     })
     const healthy: boolean = data[0] > data[2] ? true : false
+    // console.log(props.members)
 
     const users: string[] = props.members.map((x: User) => x.email)
     const positiveUsers: number[] = Array(users.length).fill(0)
@@ -36,35 +37,66 @@ const Analysis = (props: any) => {
             <div className='w-full py-6 px-8 border-b border-sec '>
                 <h2 className='text-xl font-bold '>Team Sentiment Analysis</h2>
             </div>
-            <div className='h-[350px] flex w-full border-b border-sec '>
-                <div className="py-6 px-8 w-[50%] border-r border-sec grid place-items-center">
+            <div className='md:h-[350px] flex w-full border-b border-sec md:flex-row flex-col'>
+                <div className="py-6 px-8 h-[350px] md:h-[full] md:w-[50%] md:border-r border-sec grid place-items-center">
                     <PieChart sentiment={data} />
                 </div>
-                <div className='h-full w-[50%] py-6 justify-center overflow-auto flex items-center px-8'>
+                <div className='md:h-full h-[350px] border-t border-sec md:w-[50%] py-6 justify-center overflow-auto flex items-center px-8'>
                     <BarChart users={users} positives={positiveUsers} negatives={negativeUsers} neutrals={neutralUsers} />
                 </div>
             </div>
             <div className='px-8 py-8 flex flex-col b gap-4 border-b overflow-auto h-full border-sec'>
-                <h2 className='text-xl font-bold  '>Analysis</h2>
-                <div className='flex overflow-auto flex-col gap-6 mt-8'>
-                    {props.members.map((x: User, i: number) => {
-                        let healthy = positiveUsers[i] > negativeUsers[i] ? true : false
-                        return (
-                            <div className='flex w-full gap-3 justify-between items-center' key={x.email}>
-                                <div className='flex items-center gap-3'>
-                                    <img src={x.image} className='h-12 w-12 object-cover rounded-full' alt="profile picture" />
-                                    <h2 className='text-lg font-lilbold'>{x.fname + " " + x.lname}</h2>
-                                </div>
 
-                                <div className={` p-2 ${healthy ? "bg-cyan-500/30 text-cyan-500" : "bg-red-500/30 text-red-500"} rounded-xl py-1 text-sm font-semibold`}>
-                                    {healthy ? "Positive" : "Negaitive"}
-                                </div>
-                                <p className={`${healthy?"text-green-500":"text-yellow-500"} font-lilbold hidden md:block`}>{healthy ? "Seems Motivated" : "Could use a break"}</p>
+                <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <caption className="p-5 text-lg font-semibold text-left text-white bg-sec">
+                            Analysis
+                            <p className="mt-1 text-sm font-normal text-gray-400">
+                                See detailed analysis of your team members and help your grow more productive and stress free.
+                            </p>
+                        </caption>
 
-                            </div>
-                        )
-                    })}
+                        <thead className="text-xs uppercase bg-gray-900 text-white">
+                            <tr>
+                                <th scope="col" className="px-6 py-3">
+                                    Member
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Skill
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Senitment
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Remark
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {props.members.map((x: User, i: number) => {
+                                let healthy = positiveUsers[i] > negativeUsers[i] ? true : false
+                                return (
+                                    <tr className="bg-sec border-b border-sec">
+                                        <th
+                                            scope="row"
+                                            className="px-6 py-4 font-medium  whitespace-nowraptext-white"
+                                        >
+                                            {x.fname + " " + x.lname} {x.role==="   admin"?" (admin) " :""}
+                                        </th>
+                                        <td className={`px-6 py-4 `}>{x.skills}</td>
+                                        <td className={`px-6 py-4 ${healthy?"text-cyan-500":"text-pink-500"} font-lilbold`}>{healthy?"Postitive":"Negative"}</td>
+                                        <td className={`px-6 py-4 ${healthy?"text-green-400":"text-yellow-500"} font-lilbold`}>{healthy ? "Seems Motivated" : "Could use a break"}</td>
+
+                                    </tr>
+                                )
+                            })}
+
+
+                        </tbody>
+                    </table>
                 </div>
+
             </div>
         </div >
     )

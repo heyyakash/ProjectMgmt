@@ -3,6 +3,7 @@ import '@/styles/globals.css'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { Provider } from 'jotai'
 import { NextComponentType, NextPageContext } from 'next'
 import { Hydrate, QueryClient, QueryClientProvider, useQuery } from 'react-query'
 
@@ -20,6 +21,7 @@ export default function App({ Component, pageProps }: ComponentType) {
   const queryClient = new QueryClient()
   if (getLayout) {
     return (
+      <Provider>
       <QueryClientProvider client={queryClient}>
         <SessionContextProvider supabaseClient={supabaseClient} initialSession={pageProps.initialSession}>
             <Layout {...pageProps}>
@@ -27,6 +29,7 @@ export default function App({ Component, pageProps }: ComponentType) {
             </Layout>
         </SessionContextProvider>
       </QueryClientProvider>
+      </Provider>
     )
   }
 

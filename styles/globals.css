@@ -9,7 +9,7 @@
     @apply m-0 p-0 box-border scrollbar-thumb-gray-600/50 scrollbar scrollbar-w-[3px];
   }
   body{
-    @apply md:h-[100vh] overflow-hidden w-full bg-[#1d1c2a] font-mont;
+    @apply md:h-[100vh] xl:overflow-hidden w-full bg-[#1d1c2a] font-mont;
   }
 }
 
@@ -18,7 +18,7 @@
     @apply border-indigo-500/30
   }
   .input-sec{
-    @apply border-sec mt-2 h-[50px] text-lg p-2 bg-sec text-white;
+    @apply border-sec mt-2 h-[50px] text-lg p-2 bg-sec text-white text-[.9rem] font-lilbold;
   }
   .gradient-bg{
     @apply bg-gradient-to-tr from-[#ab2cca] via-[#d856b7] to-[#f999bc];

@@ -19,6 +19,7 @@
     "chart.js": "^4.2.1",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
+    "jotai": "^2.0.4",
     "mindsdb-js-sdk": "^2.2.0",
     "moment": "^2.29.4",
     "next": "13.3.0",

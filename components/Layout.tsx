@@ -14,10 +14,10 @@ const Layout = (props: any) => {
 
 
     return (
-        <div className='w-full h-[100vh] flex '>
+        <div className='w-full h-[100vh] flex flex-col md:flex-row '>
             <Navbar image={props.metadata.image} />
             <Sidebar {...props}  />
-            <section className='w-[calc(100%-390px+.5rem)]  flex flex-col  text-white'>
+            <section className='w-full xl:w-[calc(100%-390px+.5rem)]  flex flex-col  text-white'>
                 <div className='flex w-full p-4 gap-2 items-end'>
                     <h1 className='text-[1.6rem] font-semibold'>{company} /</h1> <p className='text-white/50 mb-1'>{team}</p>
 
@@ -25,7 +25,7 @@ const Layout = (props: any) => {
                     <div className='ml-2 flex'>
                         {members?.length !== 0 ?
                             members?.map((x: any) => {
-                                return <img src={x.image} key={x.email} className='h-10 w-10 rounded-full object-cover' alt="profilePicture" />
+                                return <img src={x.image} key={x.email} className='h-10 w-10 hidden md:block rounded-full object-cover' alt="profilePicture" />
                             }) : (<></>)
                         }
 

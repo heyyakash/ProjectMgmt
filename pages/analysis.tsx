@@ -28,7 +28,7 @@ const App = (props: any) => {
     const { data: sentiment, isLoading: sentimentLoading } = useQuery("sentiment", async () => await getSentiments(company, team))
     if (memberLoading) {
         return (
-            <div className='h-full w-full flex text-white justify-center text-sm gap-4 items-center'>
+            <div className='h-full w-full flex text-white  justify-center text-sm gap-4 items-center'>
                 <BsPeopleFill className='animate-ping text-2xl' />
 
                 <p>Fetching Members..</p>

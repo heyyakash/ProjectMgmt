@@ -2,6 +2,8 @@ import React from 'react'
 import { Taskprops, color } from './Tasks'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import { useMutation, useQueryClient } from 'react-query'
+import { useAtom } from 'jotai'
+import { role } from '@/pages/dashboard'
 
 type props = {
     type: Taskprops["name"]
@@ -17,10 +19,11 @@ type props = {
 const Post = ({ type, heading, text, category, id,image }: props) => {
     const queryClient = useQueryClient()
     const supabase = useSupabaseClient()
-    const role = queryClient.getQueryData('role')
+    const [userType] = useAtom(role)
     const updateTask = async (value: string) => {
-
         const { data, error } = await supabase.from("tasks").update({ status: value }).eq("id", id)
+        if(!error) queryClient.invalidateQueries('tasks')
+        else console.log(error)
     }
 
     const { mutate } = useMutation(updateTask, {
@@ -44,14 +47,14 @@ const Post = ({ type, heading, text, category, id,image }: props) => {
                 <p className="mb-3 text-gray-400 font-lilbold">
                     {text}
                 </p>
-                {role === "admin" ?
+                {userType === "admin" ?
                     (<>
                        <img src={image} alt="portrait" className='h-12 w-12 rounded-full object-cover' /> 
                     </>) :
                     (<div className="flex gap-2 flex-wrap">
-                        <button onClick={() => mutate("progress")} className='bg-orange-500/70 p-1 px-2 rounded-xl hover:bg-orange-500 trans font-semibold text-xs'>Progress</button>
-                        {type !== "In Review" ? <button onClick={() => mutate("review")} className='bg-blue-500/70 p-1 hover:bg-blue-500 trans rounded-xl px-2 font-semibold text-xs'>Review</button> : <></>}
-                        {type !== "Completed" ? <button onClick={() => mutate("completed")} className='bg-green-500/70 p-1 hover:bg-green-500 trans rounded-xl px-2 font-semibold text-xs'>Completed</button> : <></>}
+                        {type !=="In Progress"?<button onClick={() => mutate("progress")} className='bg-orange-500/70 p-1 px-2 rounded-xl hover:bg-orange-500 trans font-semibold border-2 border-orange-500 text-xs'>Progress</button>:<></>}
+                        {type !== "In Review" ? <button onClick={() => mutate("review")} className='bg-blue-500/70 p-1 hover:bg-blue-500 trans rounded-xl px-2 font-semibold border-2 border-blue-500  text-xs'>Review</button> : <></>}
+                        {type !== "Completed" ? <button onClick={() => mutate("completed")} className='bg-green-500/70 p-1 hover:bg-green-500 trans rounded-xl px-2 border-2 border-green-500  font-semibold text-xs'>Completed</button> : <></>}
                     </div>
                     )}
 

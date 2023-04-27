@@ -13,7 +13,7 @@ const Sidebar = (props: any) => {
     const [all, setAll] = useState<project[]>([])
     const [completed, setCompleted] = useState<project[]>([])
 
-    const { data, isError } = useQuery('projects', () => getProjects(supabase, company, team), {
+    const { data:projects,isError } = useQuery('projects', () => getProjects(supabase, company, team), {
         onSuccess: (d: project[]) => {
             setCurrent(d.filter(x => x.status === "current"))
             setAll(d)
@@ -23,7 +23,7 @@ const Sidebar = (props: any) => {
 
 
     return (
-        <div className="w-[300px] border-r-[1px] border-indigo-500/20 h-full overflow-auto rounded-l-2xl bg-[#222131] -ml-2 flex flex-col p-4 items-center ">
+        <div className="w-[300px] hidden border-r-[1px] border-indigo-500/20 h-full overflow-auto rounded-l-2xl bg-[#222131] -ml-2 xl:flex flex-col p-4 items-center ">
             <div className='w-full h-[50px] mb-4 bg-indigo-500/10 px-4 rounded-xl flex items-center gap-3'>
                 <BsSearch className="text-white" />
                 <input type="text" className='text-white w-full bg-transparent border-none text-sm outline-none' placeholder='Search here' />

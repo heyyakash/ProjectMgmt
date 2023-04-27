@@ -17,7 +17,7 @@ const Dashboard = (props: any) => {
     const [progressList, setProgressList] = useState<taskstype[]>([])
     const [reviewList, setReviewList] = useState<taskstype[]>([])
     const [completeList, setCompleteList] = useState<taskstype[]>([])
-    const { data: role, isError } = useQuery('role', () => props.metadata.role)
+    
     // console.log(email)
 
     const getTasks = async () => {
@@ -45,13 +45,6 @@ const Dashboard = (props: any) => {
     // console.log(tasks)
     return (
         <div className='w-full flex flex-col  items-center h-[calc(100vh-60px)]'>
-            {/* <div className=' flex justify-between items-center h-[70px] text-white/50  w-[97%] border-b border-sec'>
-                <div className='flex  gap-3 items-center text-[.9rem] font-lilbold'>
-                    <p>Discussion</p>
-                    <p className='text-white'>Tasks</p>
-                </div>
-
-            </div> */}
             <div className='w-full border-b-2 border-b-indigo-500/20 h-[70px]  text-sm gap-2 flex items-center px-4'>
                 <button className='py-1 px-4 bg-sec rounded-2xl text-white font-lilbold items-center flex gap-2'>
                     <BsFillKanbanFill className='text-xs' />
@@ -62,7 +55,7 @@ const Dashboard = (props: any) => {
                     <p>List</p>
                 </button>
             </div>
-            <div className='grid grid-rows-1 grid-cols-4 w-full h-full overflow-x-auto'>
+            <div className='grid grid-cols-1 md:grid-rows-1 md:grid-cols-4 w-full h-full overflow-y-auto md:overflow-x-auto'>
                 <Tasks list={newList} name="New Tasks" />
                 <Tasks list={progressList} name="In Progress" />
                 <Tasks list={reviewList} name="In Review" />

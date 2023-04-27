@@ -8,39 +8,42 @@ import { useMutation, useQueryClient } from 'react-query'
 
 type props = {
     name: string
-    list: project[]
+    list: any
 }
 
 type DropDownOptionProps = {
-    id: number,
+    id: number
     name: string
+    status: 'completed' | 'current'
 }
 
-const DropDownOption = ({ name, id }: DropDownOptionProps) => {
+const DropDownOption = ({ name, id, status }: DropDownOptionProps) => {
     const supabase = useSupabaseClient()
     const queryClient = useQueryClient()
-    const updateProject = async() => {
-        await supabase.from("tasks").update({status:"completed"}).eq("project_id",id)
-        await supabase.from("Projects").update({status:"completed"}).eq("id",id)
+
+    const updateProject = async () => {
+        await supabase.from("tasks").update({ status: "completed" }).eq("project_id", id)
+        await supabase.from("Projects").update({ status: "completed" }).eq("id", id)    
         queryClient.invalidateQueries("tasks")
         queryClient.invalidateQueries("projects")
     }
-    const deleteProject = async() => {
-        await supabase.from("tasks").delete().eq("project_id",id)
-        await supabase.from("Projects").delete().eq("id",id)
+    const deleteProject = async () => {
+        await supabase.from("tasks").delete().eq("project_id", id)
+        await supabase.from("Projects").delete().eq("id", id)
         queryClient.invalidateQueries("tasks")
         queryClient.invalidateQueries("projects")
     }
 
-    const {mutate:updateProjectMutation} = useMutation(updateProject)
-    const {mutate:deleteProjectMutation} = useMutation(deleteProject)
+    const { mutate: updateProjectMutation } = useMutation(updateProject)
+    const { mutate: deleteProjectMutation } = useMutation(deleteProject)
 
     return (
         <div className='hover:bg-sec group trans rounded-xl items-center hover:text-white flex justify-between p-2'>
             <p className='text-[.9rem]'>{name}</p>
             <div className='hidden text-[.9rem] group-hover:flex gap-3'>
-                <TiTick onClick={()=>updateProjectMutation()} className='hover:text-green-500 cursor-pointer' />
-                <BsFillTrash2Fill onClick={()=>deleteProjectMutation()} className='hover:text-red-500 cursor-pointer' />
+                {status !== "completed" ? <TiTick onClick={() => updateProjectMutation()} className='hover:text-green-500 cursor-pointer' /> : <></>}
+
+                <BsFillTrash2Fill onClick={() => deleteProjectMutation()} className='hover:text-red-500 cursor-pointer' />
             </div>
         </div>
 
@@ -60,7 +63,7 @@ const Dropdowns = ({ name, list }: props) => {
                 }
             </div>
             <div className={`text-md flex flex-col w-full p-2 text-white/50 font-[500] gap-3 trans ${show ? "" : "hidden"}`}>
-                {list.map(x => <DropDownOption name={x.name} id={x.id} key={x.id} />)}
+                {list.map((x: project) => <DropDownOption name={x.name} id={x.id} key={x.id} status={x.status} />)}
             </div>
         </div>
     )

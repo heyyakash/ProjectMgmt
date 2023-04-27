@@ -8,9 +8,11 @@ const Login = () => {
     const [loading,setLoading] = useState<boolean>(false)
     const {register, handleSubmit} = useForm()
     const supabase = useSupabaseClient()
+    const [error,setError] = useState<string | null>(null)
     const router = useRouter()
     const handleLogin = async (payload:any) =>{
         setLoading(true)
+        setError(null)
         const {email,password} = payload
         const {data,error}:any = await supabase.auth.signInWithPassword({
             email,
@@ -20,6 +22,11 @@ const Login = () => {
         if(!error){
             // localStorage.setItem("user",JSON.stringify(data))
             router.push("/dashboard")
+        }
+        else{
+            const text = error.toString().split(":")[1]
+            // console.log(error.toString())
+            setError(text)
         }
     }
 
@@ -31,9 +38,10 @@ const Login = () => {
             <div className='mt-4 w-full px-8 md:p-4 '>
                 <input type="email" required id="email" {...register("email")}  placeholder='email' className='form-input' />
                 <input type="password" required id="password" {...register("password")} placeholder='password' className='form-input' />
+                {error?<p className='text-red-600 font-lilbold mt-4 -mb-4 flex justify-center items-center'>{error}</p>:<></>}
                 <input type="submit" value={loading?"Logging In..." : "Log In"} className={`w-full p-4 button mt-9 rounded-xl  ${loading?"bg-white text-pink-500":"gradient-bg"}`} />
             </div>
-
+            
         </form>
     )
 }

@@ -16,7 +16,7 @@ export const color = {
 
 const Tasks = ({ name, list }: Taskprops) => {
     return (
-        <div className=' overflow-auto border-r border-sec'>
+        <div className=' md:overflow-auto border-r border-sec'>
             <div className='h-[70px] flex w-full px-8 items-center gap-2 justify-between flex-row-reverse border-b border-sec '>
                 <div className={`h-2 w-2  rounded-full ${color[name]}`}></div>
                 <p className='font-semibold text-sm'>{name}</p>

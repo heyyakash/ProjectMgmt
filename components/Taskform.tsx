@@ -22,43 +22,47 @@ type props = {
 
 const Taskform = ({ date, setDate, company, team, setMode, task, setTask }: props) => {
     const { register, handleSubmit } = useForm()
-    // const projects = ["Xylem", "Nike", "Vercel", "Hasura"]
+    const [error,setError] = useState<string | null>(null)
     const [assigning, setAssigning] = useState<boolean>(false)
     const [show, setShow] = useState<boolean>(false)
     const queryClient = useQueryClient()
     const [newProject, setNewProject] = useState<string>("")
     const supabase = useSupabaseClient()
 
-    const { data:projects, isError } = useQuery('projects', () => getProjects(supabase, company, team))
-    
+    const { data: projects, isError } = useQuery('projects', () => getProjects(supabase, company, team))
+
 
     const addProject = async () => {
         const { data, error } = await supabase.from("Projects").insert({ name: newProject, company, team, status: "current" })
-        if (!error){
+        if (!error) {
             setNewProject("")
             queryClient.invalidateQueries('projects')
         }
     }
 
 
-    const {mutate} = useMutation(addProject)
+    const { mutate } = useMutation(addProject)
     const router = useRouter()
 
 
 
 
-    const handleTask = async (data:any) => {
+    const handleTask = async (data: any) => {
         setAssigning(true)
+        setError(null)
         const res = await fetch("/api/addtask", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ task:data.task,project:data.project, company, team, deadline: date })
+            body: JSON.stringify({ task: data.task, project: data.project, company, team, deadline: date })
         })
         const result = await res.json()
         setAssigning(false)
-        if(result.success)  router.push('/dashboard')
+        if (result.success) router.push('/dashboard')
+        else{
+            setError(result.msg)
+        }
 
     }
 
@@ -67,44 +71,42 @@ const Taskform = ({ date, setDate, company, team, setMode, task, setTask }: prop
         setMode("calendar")
     }
     return (
-        <div className='w-full'>
-            <div className='px-8 py-5 border-b border-sec'>
-                <h2 className='text-2xl  font-bold'>Create Project</h2>
-                <div className='flex gap-2 flex-col items-start mt-8'>
-                    <h3 className='text-md text-white/70 font-lilbold'>Enter project name</h3>
+        <div className='w-full overflow-y-auto'>
+            <div className='p-4 border-b border-sec'>
+                <h2 className='text-md font-lilbold'>Create Project</h2>
+                <div className='flex gap-2 flex-col items-start'>
                     <div className='flex gap-3'>
-                        <input value={newProject} onChange={(e) => setNewProject(e.target.value)} placeholder='project name' type="text" className='input-sec w-[calc(600px-2rem-.75rem)] text-md font-lilbold ' />
-                        <button onClick={() => mutate()} className='input-sec text-sm font-bold px-4 hover:bg-white hover:text-slate-800' > +  </button> 
+                        <input value={newProject} onChange={(e) => setNewProject(e.target.value)} placeholder='project name' type="text" className='input-sec text-[.9rem] w-full md:w-[calc(600px-2rem-.75rem)] text-md font-lilbold ' />
+                        <button onClick={() => mutate()} disabled = {newProject.length===0} className='input-sec text-sm font-bold px-4 hover:bg-white hover:text-slate-800' > +  </button>
                     </div>
 
                 </div>
             </div>
 
-            <form onSubmit={handleSubmit(handleTask)} className='flex flex-col px-8 py-6 border-b border-sec '>
+            <form onSubmit={handleSubmit(handleTask)} className='flex flex-col p-4   '>
                 <div className=' border-sec'>
-                    <h2 className='text-2xl  font-bold'>Create Task</h2>
+                    <h2 className='text-md  font-lilbold'>Create Task</h2>
                 </div>
-                <div className={` trans border-sec flex flex-col gap-2 mt-8`}>
-                    <h3 className='text-md text-white/70 font-lilbold'>Select Project</h3>
+                <div className={` trans border-sec flex flex-col gap-2 mt-1`}>
+                    {/* <h3 className='text-md text-white/70 font-lilbold'>Select Project</h3> */}
                     <div className="flex gap-4">
                         <select {...register("project")} className='input-sec w-[600px]' {...register("project")} id="projects">
-                            {projects?.map((x:project) => <option key={x.name} value={x.name}>{x.name}</option>)}
+                            <option value="" disabled selected>Select Project</option>
+                            {projects?.map((x: project) => <option className='text-black' key={x.name} value={(x.id).toString()+ "*" + x.name}>{x.name}</option>)}
                         </select>
-
                     </div>
                 </div>
-                <div className={` trans flex flex-col mt-5 gap-4`}>
-                    <h3 className='text-md text-white/70 font-lilbold'>Describe Task</h3>
+                <div className={` trans flex flex-col mt-2 gap-2`}>
 
 
-                    <textarea placeholder='Task description' {...register("task")} required className='input-sec w-[600px] p-3 text-md font-lilbold h-[200px]' />
+                    <textarea placeholder='Task description' {...register("task")} required className='input-sec md:w-[600px] p-3 text-md font-lilbold h-[200px]' />
 
-                    <div className='flex gap-4 w-[600px]'>
+                    <div className='flex gap-4 md:w-[600px]'>
                         <div className='flex flex-[.7] input-sec p-0 items-center px-2'>
-                            <p className='text-xl font-lilbold'>{"Deadline - " + date}</p>
+                            <p className='text-md font-lilbold'>{"Deadline - " + date}</p>
                             <CgArrowsExchangeV onClick={() => changeDate()} className='cursor-pointer ml-auto text-2xl' />
                         </div>
-                        <input type = "submit" id = "submit" name = "submit" className='hidden' />
+                        <input type="submit" id="submit" name="submit" className='hidden' />
                         <label htmlFor="submit" className="input-sec text-sm font-bold w-[600px] flex-[.3] grid place-items-center trans px-4 hover:bg-white hover:text-slate-800">
                             {assigning ? <HiSparkles className='text-lg animate-ping ' /> : <>Assign</>}
                         </label>
