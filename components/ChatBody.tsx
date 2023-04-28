@@ -41,13 +41,13 @@ const ChatBody = (props:any) => {
 
     const [msg, setMsg] = useState<string>("")
     return (
-        <div className='flex flex-col relative w-full lg:w-[calc(100%-350px)]'>
+        <div className='flex flex-col relative w-full h-full  lg:w-[calc(100%-350px)]'>
     
-            <div className='w-full h-[calc(100%-70px-2.76rem)] overflow-y-auto p-6'>
+            <div className='w-full h-[590px] overflow-y-auto p-6'>
                 {messages.length>0? messages.map((x:any)=> <ChatMessage key = {x.id} email = {x.email} message={x.message} direction={x.email===email?"float-right":"float-left"} />):<div className='w-full h-full grid place-items-center text-md font-bold'>You are the first one here! Say Hi..</div>}
                 
             </div>
-            <div className='w-full bottom-0 absolute h-[70px]  border-t border-sec flex'>
+            <div className='w-full bottom-0 bg-sec absolute h-[70px]  border-t border-sec flex'>
                 <input value={msg} onChange={(e) => setMsg(e.target.value)} type="text" placeholder='Enter you message !' className='h-[97%] grow outline-none text-xl p-2 bg-transparent' />
                 <button onClick = {()=>sendMessage()} className='button bg-pink-500 text-white trans hover:bg-white ml-auto hover:text-pink-500 p-4 '>Send</button>
             </div>
