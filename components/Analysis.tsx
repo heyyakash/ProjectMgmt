@@ -77,7 +77,7 @@ const Analysis = (props: any) => {
                             {props.members.map((x: User, i: number) => {
                                 let healthy = positiveUsers[i] > negativeUsers[i] ? true : false
                                 return (
-                                    <tr className="bg-sec border-b border-sec">
+                                    <tr key = {i} className="bg-sec border-b border-sec">
                                         <th
                                             scope="row"
                                             className="px-6 py-4 font-medium  whitespace-nowraptext-white"

@@ -37,7 +37,7 @@ export default function Home() {
         {/* <div className='w-[400px] h-[400px] top-[10%] left-[10%] gradient-bg rounded-full absolute'></div>
         <div className='inset-0  backdrop-blur-[100px] absolute'></div> */}
           <div className='flex w-full p-4 flex-col gap-4 relative'>
-            <h1 className='text-[2rem] md:text-[3rem]  font-extrabold md:leading-[4.7rem] bg-gradient-to-r  from-white via-pink-400 to-purple-400 bg-clip-text text-transparent'>Maximize your team's efficiency and productivity with <span className='gradient-bg text-transparent bg-clip-text background-animate'>Progressify.</span></h1>
+            <h1 className='text-[2rem] md:text-[3rem]  font-extrabold md:leading-[4.7rem] bg-gradient-to-r  from-white via-pink-400 to-purple-400 bg-clip-text text-transparent'>Maximize your team&apos;s efficiency and productivity with <span className='gradient-bg text-transparent bg-clip-text background-animate'>Progressify.</span></h1>
             <div className='grid grid-cols-2 grid-rows-2 gap-4 mt-5'>
               <Features text={"Let AI do the heavy lifting"}><FaDumbbell /></Features>
               <Features text={"Automate task assignment"}><HiSparkles /></Features>
@@ -46,9 +46,9 @@ export default function Home() {
             </div>
           </div>
           <div className='w-full flex justify-center relative items-center'>
-            <img src="/ss1.png" className='hero-image top-5 z- w-[300px] z-[100]' alt="" />
-            <img src="/ss2.png" className='hero-image bottom-3 left-4 w-[300px] z-[80]' alt="" />
-            <img src="/ss3.png" className='hero-image -bottom-7 right-5  w-[300px] z-[50]' alt="" />
+            <Image src="/ss1.png" height={200} width={320} className='hero-image top-20  z-[100]' alt="" />
+            <Image src="/ss2.png" height={200} width={320} className='hero-image bottom-8 left-4  z-[80]' alt="" />
+            <Image src="/ss3.png" height={200} width={320} className='hero-image -bottom-7 right-5   z-[50]' alt="" />
           </div>
         </section>
 
