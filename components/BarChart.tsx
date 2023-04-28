@@ -64,7 +64,7 @@ export function BarChart({ users, positives, neutrals, negatives }: props) {
                 stack: 'Stack 0',
             },
             {
-                label: 'Negative',
+                label: 'Neutral',
                 data: neutrals,
                 backgroundColor: 'rgba(255, 206, 86)',
                 stack: 'Stack 0',
