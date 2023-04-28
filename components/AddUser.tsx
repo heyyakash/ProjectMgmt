@@ -4,10 +4,12 @@ import { useForm } from 'react-hook-form'
 // import { SupabaseClient } from '@supabase/supabase-js'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import { redirect } from 'next/dist/server/api-utils'
+import { useQueryClient } from 'react-query'
 
 const AddUser = (props: any) => {
     const { register, handleSubmit } = useForm()
     const supabase = useSupabaseClient()
+    const queryClient = useQueryClient()
     const { company, team } = props.metadata
     const [success,setSuccess] = useState<boolean>(false)
     const [error,setError] = useState<string | null>(null)
@@ -26,6 +28,7 @@ const AddUser = (props: any) => {
         })
         const result = await res.json()
         if (result.success){
+            queryClient.invalidateQueries("members")
             setSuccess(true)
             setTimeout(() => {
                 setSuccess(false)
