@@ -1,6 +1,9 @@
+import getMembers from '@/helper/getMembers'
 import getProjects from '@/helper/getProjects'
 import { project } from '@/types/projects.types'
+import { User } from '@/types/user.types'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
+import moment from 'moment'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -43,7 +46,7 @@ const Taskform = ({ date, setDate, company, team, setMode, task, setTask }: prop
 
     const { mutate } = useMutation(addProject)
     const router = useRouter()
-
+    const {data:members} = useQuery('members',async()=>getMembers(supabase, company, team))
 
 
 
@@ -59,7 +62,32 @@ const Taskform = ({ date, setDate, company, team, setMode, task, setTask }: prop
         })
         const result = await res.json()
         setAssigning(false)
-        if (result.success) router.push('/dashboard')
+        if (result.success) {
+
+            const users = members?.filter((x)=> x.skills===result.category)
+            if(users && users.length!==0){
+                const {error} = await supabase.from("tasks").insert({
+                    company,
+                    team,
+                    task_desc: data.task,
+                    task_category: result.category,
+                    assigned_to: users[0]?.email,
+                    deadline_date: moment(date, "DD-MM-YYYY").toISOString(),
+                    project_id:parseInt(data.project.split("*")[0]),
+                    project: data.project.split("*")[1],
+                    user_image: users[0].image,
+                    status: "new",
+                    task_title: data.project.split("*")[1]
+                })
+                if(error) setError(error.message)
+                else router.push('/dashboard')
+            }
+            else{
+                setError(`Cannot find any user with the skills of ${result.category}`)
+            }
+            // console.log(users[0])
+            // router.push('/dashboard')
+        }
         else{
             setError(result.msg)
         }
