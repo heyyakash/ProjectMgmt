@@ -74,8 +74,8 @@ const AddUser = (props: any) => {
                         <option value="Web Development">Web Developer</option>
                         <option value="DevOps">DevOps</option>
                         <option value="Marketing">Marketing</option>
-                        <option value="App Development">App Developer</option>
-                        <option value="Design">UI /UX</option>
+                        <option value="Mobile App">App Developer</option>
+                        <option value="UI/UX">UI /UX</option>
                     </select>
                 </div>
                 <div className='flex flex-col'>
