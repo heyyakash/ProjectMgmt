@@ -22,7 +22,7 @@ const Tasks = ({ name, list }: Taskprops) => {
                 <p className='font-semibold text-sm'>{name}</p>
             </div>
             <div className='w-full p-4 md:p-6 flex flex-col gap-6'>
-                {list.map(x=><Post id= {x.id} image = {x.user_image} category={x.task_category} type = {name} heading={x.task_title} text = {x.task_desc} key = {x.id} />)}
+                {list.map(x=><Post id= {x.id} image = {x.user_image} category={x.task_category} type = {name} heading={x.task_title} date = {x.deadline_date} text = {x.task_desc} key = {x.id} />)}
 
            
             </div>
