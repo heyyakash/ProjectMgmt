@@ -25,7 +25,7 @@ type props = {
 
 const Taskform = ({ date, setDate, company, team, setMode, task, setTask }: props) => {
     const { register, handleSubmit } = useForm()
-    const [error,setError] = useState<string | null>(null)
+    const [error, setError] = useState<string | null>(null)
     const [assigning, setAssigning] = useState<boolean>(false)
     const [show, setShow] = useState<boolean>(false)
     const queryClient = useQueryClient()
@@ -46,52 +46,56 @@ const Taskform = ({ date, setDate, company, team, setMode, task, setTask }: prop
 
     const { mutate } = useMutation(addProject)
     const router = useRouter()
-    const {data:members} = useQuery('members',async()=>getMembers(supabase, company, team))
+    const { data: members } = useQuery('members', async () => getMembers(supabase, company, team))
 
 
 
     const handleTask = async (data: any) => {
-        setAssigning(true)
-        setError(null)
-        const res = await fetch("/api/addtask", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ task: data.task, project: data.project, company, team, deadline: date })
-        })
-        const result = await res.json()
-        setAssigning(false)
-        if (result.success) {
-
-            const users = members?.filter((x)=> x.skills===result.category)
-            if(users && users.length!==0){
-                const {error} = await supabase.from("tasks").insert({
-                    company,
-                    team,
-                    task_desc: data.task,
-                    task_category: result.category,
-                    assigned_to: users[0]?.email,
-                    deadline_date: moment(date, "DD-MM-YYYY").toISOString(),
-                    project_id:parseInt(data.project.split("*")[0]),
-                    project: data.project.split("*")[1],
-                    user_image: users[0].image,
-                    status: "new",
-                    task_title: data.project.split("*")[1]
-                })
-                if(error) setError(error.message)
-                else router.push('/dashboard')
-            }
-            else{
-                setError(`Cannot find any user with the skills of ${result.category}`)
-            }
-            // console.log(users[0])
-            // router.push('/dashboard')
+        if (data.project === "") {
+            setError("Select Project!")
         }
-        else{
-            setError(result.msg)
-        }
+        else {
+            setAssigning(true)
+            setError(null)
+            const res = await fetch("/api/addtask", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ task: data.task, project: data.project, company, team, deadline: date })
+            })
+            const result = await res.json()
+            setAssigning(false)
+            if (result.success) {
 
+                const users = members?.filter((x) => x.skills === result.category)
+                if (users && users.length !== 0) {
+                    const { error } = await supabase.from("tasks").insert({
+                        company,
+                        team,
+                        task_desc: data.task,
+                        task_category: result.category,
+                        assigned_to: users[0]?.email,
+                        deadline_date: moment(date, "DD-MM-YYYY").toISOString(),
+                        project_id: parseInt(data.project.split("*")[0]),
+                        project: data.project.split("*")[1],
+                        user_image: users[0].image,
+                        status: "new",
+                        task_title: data.project.split("*")[1]
+                    })
+                    if (error) setError(error.message)
+                    else router.push('/dashboard')
+                }
+                else {
+                    setError(`Cannot find any user with the skills of ${result.category}`)
+                }
+                // console.log(users[0])
+                // router.push('/dashboard')
+            }
+            else {
+                setError(result.msg)
+            }
+        }
     }
 
     const changeDate = () => {
@@ -105,7 +109,7 @@ const Taskform = ({ date, setDate, company, team, setMode, task, setTask }: prop
                 <div className='flex gap-2 flex-col items-start'>
                     <div className='flex gap-3'>
                         <input value={newProject} onChange={(e) => setNewProject(e.target.value)} placeholder='project name' type="text" className='input-sec text-[.9rem] w-full md:w-[calc(600px-2rem-.75rem)] text-md font-lilbold ' />
-                        <button onClick={() => mutate()} disabled = {newProject.length===0} className='input-sec text-sm font-bold px-4 hover:bg-white hover:text-slate-800' > +  </button>
+                        <button onClick={() => mutate()} disabled={newProject.length === 0} className='input-sec text-sm font-bold px-4 hover:bg-white hover:text-slate-800' > +  </button>
                     </div>
 
                 </div>
@@ -120,7 +124,7 @@ const Taskform = ({ date, setDate, company, team, setMode, task, setTask }: prop
                     <div className="flex gap-4">
                         <select {...register("project")} className='input-sec w-[600px]' {...register("project")} id="projects">
                             <option value="" disabled selected>Select Project</option>
-                            {projects?.map((x: project) => <option className='text-black' key={x.name} value={(x.id).toString()+ "*" + x.name}>{x.name}</option>)}
+                            {projects?.map((x: project) => <option className='text-black' key={x.name} value={(x.id).toString() + "*" + x.name}>{x.name}</option>)}
                         </select>
                     </div>
                 </div>
@@ -134,12 +138,12 @@ const Taskform = ({ date, setDate, company, team, setMode, task, setTask }: prop
                             <p className='text-md font-lilbold'>{"Deadline - " + date}</p>
                             <CgArrowsExchangeV onClick={() => changeDate()} className='cursor-pointer ml-auto text-2xl' />
                         </div>
-                        <input type="submit" disabled = {projects?.length===0    } id="submit" name="submit" className='hidden' />
+                        <input type="submit" disabled={projects?.length === 0} id="submit" name="submit" className='hidden' />
                         <label htmlFor="submit" className="input-sec text-sm font-bold w-[600px] flex-[.3] grid place-items-center trans px-4 hover:bg-white hover:text-slate-800">
                             {assigning ? <HiSparkles className='text-lg animate-ping ' /> : <>Assign</>}
                         </label>
                     </div>
-                        <p className='text-red-500 text-lg font-bold'>{error && error}</p>
+                    <p className='text-red-500 text-lg font-bold'>{error && error}</p>
                 </div>
             </form>
         </div>
