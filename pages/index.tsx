@@ -23,7 +23,7 @@ export default function Home() {
       <main className='w-full md:h-[100vh] relative'>
     
         <div className='w-full h-[70px] relative'>
-          <nav className='w-full px-2 md:px-0 md:w-[1400px] mx-auto h-full flex justify-between items-center'>
+          <nav className='w-full px-2 md:px-0  xl:w-[1400px] mx-auto h-full flex justify-between items-center'>
             <div className='flex items-center gap-2'>
               <IoPeopleCircle className="text-pink-600 text-[3rem]" />
               <h2 className='text-2xl font-bold text-white '>Progressify</h2>

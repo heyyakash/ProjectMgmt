@@ -14,7 +14,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             FROM NEWDB.Chats AS input
             JOIN sentiment_analyzer AS model
             WHERE input.company='${company}' AND input.team='${team}';`
-
             const queryResult = await MindsDB.SQL.runQuery(query)
             res.status(200).json({result:queryResult.rows})
         }
