@@ -78,7 +78,7 @@ const Analysis = (props: any) => {
                                 let healthy = positiveUsers[i] > negativeUsers[i] ? true : false
                                 return (
                                     <tr key = {i} className="bg-sec border-b border-sec">
-                                        <th
+                                        <th 
                                             scope="row"
                                             className="px-6 py-4 font-medium  whitespace-nowraptext-white"
                                         >

@@ -53,7 +53,7 @@ type props = {
 
 export function BarChart({ users, positives, neutrals, negatives }: props) {
     const labels = users
-    
+
     const data = {
         labels,
         datasets: [
@@ -64,16 +64,22 @@ export function BarChart({ users, positives, neutrals, negatives }: props) {
                 stack: 'Stack 0',
             },
             {
+                label: 'Negative',
+                data: neutrals,
+                backgroundColor: 'rgba(255, 206, 86)',
+                stack: 'Stack 0',
+            },
+            {
                 label: 'Positive',
                 data: positives,
                 backgroundColor: 'rgb(75, 192, 192)',
                 stack: 'Stack 0',
             },
-      
+
         ],
     }
-    console.log(positives,negatives)
-    if(positives.length===0 && neutrals.length===0 && negatives.length===0){
+    console.log(positives, negatives)
+    if (positives.length === 0 && neutrals.length === 0 && negatives.length === 0) {
         return <p className='text-md font-bold'>Not Enoough Data</p>
     }
     return <Bar options={options} data={data} />;

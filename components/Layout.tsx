@@ -5,18 +5,20 @@ import Link from 'next/link'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import { useQuery, useQueryClient } from 'react-query'
 import getMembers from '@/helper/getMembers'
+import { useAtom } from 'jotai'
+import { role } from '@/pages/dashboard'
 
 const Layout = (props: any) => {
-
+    const [userType] = useAtom(role)
     const supabase = useSupabaseClient()
-    const {company,team} = props.metadata
-    const {data:members, isError} = useQuery("members",async() => await getMembers(supabase,company, team))
+    const { company, team } = props.metadata
+    const { data: members, isError } = useQuery("members", async () => await getMembers(supabase, company, team))
 
 
     return (
         <div className='w-full h-[100vh] flex flex-col md:flex-row '>
             <Navbar image={props.metadata.image} />
-            <Sidebar {...props}  />
+            <Sidebar {...props} />
             <section className='w-full xl:w-[calc(100%-390px+.5rem)]  flex flex-col  text-white'>
                 <div className='flex w-full p-4 gap-2 items-end'>
                     <h1 className='text-[1.6rem] font-semibold'>{company} </h1> <p className='text-white/50 mb-1 hidden md:block'> / {team}</p>
@@ -28,10 +30,12 @@ const Layout = (props: any) => {
                                 return <img src={x.image} key={x.email} className='h-10 w-10 hidden md:block rounded-full object-cover' alt="profilePicture" />
                             }) : (<></>)
                         }
+                        {userType === "admin" ? (
+                            <Link href={"/adduser"} className='ml-2 bg-sec rounded-full h-10 w-10 text-bold text-4xl hover:bg-white trans hover:text-purple-500 grid place-items-center'>
+                                +
+                            </Link>
+                        ) : (<></>)}
 
-                        <Link href={"/adduser"} className='ml-2 bg-sec rounded-full h-10 w-10 text-bold text-4xl hover:bg-white trans hover:text-purple-500 grid place-items-center'>
-                            +
-                        </Link>
                     </div>
                 </div>
                 {props.children}

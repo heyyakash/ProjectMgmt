@@ -16,6 +16,7 @@ type props = {
 
 const Navbar = ({ image }: props) => {
     const router = useRouter()
+
     const supabase = useSupabaseClient()
     const signOut = async () => {
         await supabase.auth.signOut()
