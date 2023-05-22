@@ -14,11 +14,13 @@ type props = {
     text: string
     image: string
     date: string
+    email: string
 }
 
 
 
-const Post = ({ type, heading, text, category, id, image, date }: props) => {
+
+const Post = ({ type, heading, text, category,email ,id, image, date }: props) => {
     const queryClient = useQueryClient()
     const supabase = useSupabaseClient()
     const [userType] = useAtom(role)
@@ -56,9 +58,10 @@ const Post = ({ type, heading, text, category, id, image, date }: props) => {
                     {text}
                 </p>
                 {/* {userType === "admin" ? */}
-                    <>
+                    <div className='flex items-center gap-2 mt-6'>
                         <img src={image} alt="portrait" className='h-8 w-8 rounded-full object-cover' />
-                    </> 
+                        <p className='text-sm font-lilbold'>{email}</p>
+                    </div> 
                     <div className=" mt-3 flex gap-2 flex-wrap">
                         {type !== "In Progress" ? <button onClick={() => mutate("progress")} className='bg-orange-500/70 p-1 px-2 rounded-xl hover:bg-orange-500 trans font-semibold border-2 border-orange-500 text-xs'>Progress</button> : <></>}
                         {type !== "In Review" ? <button onClick={() => mutate("review")} className='bg-blue-500/70 p-1 hover:bg-blue-500 trans rounded-xl px-2 font-semibold border-2 border-blue-500  text-xs'>Review</button> : <></>}
