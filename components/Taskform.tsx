@@ -57,43 +57,48 @@ const Taskform = ({ date, setDate, company, team, setMode, task, setTask }: prop
         else {
             setAssigning(true)
             setError(null)
-            const res = await fetch("/api/addtask", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ task: data.task, project: data.project, company, team, deadline: date })
-            })
-            const result = await res.json()
-            setAssigning(false)
-            if (result.success) {
+            try {
+                const res = await fetch("/api/addtask", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ task: data.task, project: data.project, company, team, deadline: date })
+                })
+                const result = await res.json()
+                setAssigning(false)
+                if (result.success) {
 
-                const users = members?.filter((x) => x.skills === result.category)
-                if (users && users.length !== 0) {
-                    const { error } = await supabase.from("tasks").insert({
-                        company,
-                        team,
-                        task_desc: data.task,
-                        task_category: result.category,
-                        assigned_to: users[0]?.email,
-                        deadline_date: moment(date, "DD-MM-YYYY").toISOString(),
-                        project_id: parseInt(data.project.split("*")[0]),
-                        project: data.project.split("*")[1],
-                        user_image: users[0].image,
-                        status: "new",
-                        task_title: data.project.split("*")[1]
-                    })
-                    if (error) setError(error.message)
-                    else router.push('/dashboard')
+                    const users = members?.filter((x) => x.skills === result.category)
+                    if (users && users.length !== 0) {
+                        const { error } = await supabase.from("tasks").insert({
+                            company,
+                            team,
+                            task_desc: data.task,
+                            task_category: result.category,
+                            assigned_to: users[0]?.email,
+                            deadline_date: moment(date, "DD-MM-YYYY").toISOString(),
+                            project_id: parseInt(data.project.split("*")[0]),
+                            project: data.project.split("*")[1],
+                            user_image: users[0].image,
+                            status: "new",
+                            task_title: data.project.split("*")[1]
+                        })
+                        if (error) setError(error.message)
+                        else router.push('/dashboard')
+                    }
+                    else {
+                        setError(`Cannot find any user with the skills of ${result.category}`)
+                    }
+                    // console.log(users[0])
+                    // router.push('/dashboard')
                 }
                 else {
-                    setError(`Cannot find any user with the skills of ${result.category}`)
+                    setError(result.msg)
                 }
-                // console.log(users[0])
-                // router.push('/dashboard')
             }
-            else {
-                setError(result.msg)
+            catch (err) {
+                setError("Error Occuered! Try again")
             }
         }
     }
