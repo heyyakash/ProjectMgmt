@@ -98,6 +98,8 @@ const Taskform = ({ date, setDate, company, team, setMode, task, setTask }: prop
                 }
             }
             catch (err) {
+                setAssigning(false)
+                console.log(err)
                 setError("Error Occuered! Try again")
             }
         }
